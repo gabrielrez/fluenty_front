@@ -4,7 +4,7 @@
         <p class="text-[#6B778F] mt-4">O que nossos alunos dizem sobre o Fluenty.</p>
         <div class="mt-8 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
             <div v-for="testimonial in testimonials" :key="testimonial.name"
-                class="bg-white border border-[#E0E5EE] rounded-xl p-6 shadow-md">
+                class="bg-white border border-[#E0E5EE] rounded-xl p-6 shadow-md hover:shadow-xl transition-all">
                 <img src="/images/5stars.svg" alt="5 stars">
                 <p class="my-4 text-sm text-[#1B2232] border-b border-[#E0E5EE] pb-4">"{{ testimonial.text }}"</p>
                 <div class="flex items-center gap-2">

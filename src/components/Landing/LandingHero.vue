@@ -22,8 +22,8 @@
                     comprovado.
                 </p>
             </div>
-            <router-link to="/"
-                class="mx-auto lg:mx-0 mt-6 w-max flex items-center gap-2 bg-[#1D56C9] px-8 py-3 rounded-xl text-white font-medium hover:bg-[#1A4FB8] hover:scale-[98%] transition-all">Começar
+            <router-link to="/home"
+                class="mx-auto lg:mx-0 mt-6 w-max flex items-center gap-2 bg-[#1D56C9] px-8 py-3 rounded-xl text-white font-medium hover:bg-[#3367CE] hover:scale-[98%] transition-all">Começar
                 a Aprender
                 <ArrowRightIcon class="w-4 h-4" />
             </router-link>
