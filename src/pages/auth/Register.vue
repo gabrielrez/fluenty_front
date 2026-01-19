@@ -1,3 +1,40 @@
+<script setup>
+import { api } from '../../lib/api';
+import { ArrowLeft, Lock, Mail, User } from 'lucide-vue-next';
+import Logo from '../../components/Logo.vue';
+import { reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import FormError from '../../components/Feedback/FormError.vue';
+
+const router = useRouter();
+
+const loading = ref(false);
+const errors = ref([]);
+
+const form = reactive({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+});
+
+async function handleRegister() {
+    loading.value = true;
+    errors.value = [];
+
+    try {
+        const { data } = await api.post('/auth/register', form);
+
+        localStorage.setItem('token', data.token);
+        router.push('/home');
+    } catch (error) {
+        errors.value = error;
+    } finally {
+        loading.value = false;
+    }
+}
+</script>
+
 <template>
     <header class="fixed top-0 left-0 w-full z-50 p-5 border-b border-[#E0E5EE] bg-white">
         <div
@@ -23,12 +60,12 @@
                     conta</router-link>
             </div>
 
-            <form action="" class="mt-8">
+            <form @submit.prevent="handleRegister" class="mt-8">
                 <div>
                     <label for="name" class="text-sm font-medium">Nome</label>
                     <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-xl pl-2.5">
                         <User class="w-5 h-5 text-[#667799]" />
-                        <input type="text" name="name" id="name" placeholder="Seu nome"
+                        <input v-model="form.name" type="text" name="name" id="name" placeholder="Seu nome"
                             class="w-full p-2.5 text-sm text-[#1b2232] rounded-xl">
                     </div>
                 </div>
@@ -36,7 +73,7 @@
                     <label for="email" class="text-sm font-medium">Email</label>
                     <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-xl pl-2.5">
                         <Mail class="w-5 h-5 text-[#667799]" />
-                        <input type="text" name="email" id="email" placeholder="seu@email.com"
+                        <input v-model="form.email" type="text" name="email" id="email" placeholder="seu@email.com"
                             class="w-full p-2.5 text-sm text-[#1b2232] rounded-xl">
                     </div>
                 </div>
@@ -44,19 +81,22 @@
                     <label for="password" class="text-sm font-medium">Senha</label>
                     <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-xl pl-2.5">
                         <Lock class="w-5 h-5 text-[#667799]" />
-                        <input type="password" name="password" id="password" placeholder="Mínimo 6 caracteres"
-                            class="w-full p-2.5 text-sm text-[#1b2232] rounded-xl">
+                        <input v-model="form.password" type="password" name="password" id="password"
+                            placeholder="Mínimo 6 caracteres" class="w-full p-2.5 text-sm text-[#1b2232] rounded-xl">
                     </div>
                 </div>
                 <div class="mt-4">
                     <label for="password_confirmation" class="text-sm font-medium">Confirmar Senha</label>
                     <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-xl pl-2.5">
                         <Lock class="w-5 h-5 text-[#667799]" />
-                        <input type="password" name="password_confirmation" id="password_confirmation"
-                            placeholder="Digite a senha novamente"
+                        <input v-model="form.password_confirmation" type="password" name="password_confirmation"
+                            id="password_confirmation" placeholder="Digite a senha novamente"
                             class="w-full p-2.5 text-sm text-[#1b2232] rounded-xl">
                     </div>
                 </div>
+
+                <FormError :errors="errors" />
+
                 <button
                     class="mt-6 w-full text-white bg-[#1D56C9] font-bold rounded-xl px-8 py-3 text-sm cursor-pointer hover:bg-[#3367CE] transition-all">
                     Criar conta
@@ -65,8 +105,3 @@
         </div>
     </main>
 </template>
-
-<script setup>
-import { ArrowLeft, Lock, Mail, User } from 'lucide-vue-next';
-import Logo from '../../components/Logo.vue';
-</script>
