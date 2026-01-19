@@ -1,12 +1,13 @@
 <script setup>
-import { api } from '../../lib/api';
 import { ArrowLeft, Lock, Mail, User } from 'lucide-vue-next';
 import Logo from '../../components/Logo.vue';
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import FormError from '../../components/Feedback/FormError.vue';
+import { useUserStore } from '../../stores/user';
 
 const router = useRouter();
+const userStore = useUserStore();
 
 const loading = ref(false);
 const errors = ref([]);
@@ -23,9 +24,8 @@ async function handleRegister() {
     errors.value = [];
 
     try {
-        const { data } = await api.post('/auth/register', form);
+        await userStore.register(form);
 
-        localStorage.setItem('token', data.token);
         router.push('/home');
     } catch (error) {
         errors.value = error;
