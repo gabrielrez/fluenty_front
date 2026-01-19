@@ -6,7 +6,7 @@
     
     <LandingCTASection 
         title="Comece sua jornada no inglês hoje" 
-        subtitle="Junte-se a milhares de alunos"
+        subtitle="Junte-se à comunidade de alunos"
         :showUsersIcon="true"
     />
 
