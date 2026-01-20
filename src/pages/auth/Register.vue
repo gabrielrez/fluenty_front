@@ -1,6 +1,6 @@
 <script setup>
 import { ArrowLeft, Lock, Mail, User } from 'lucide-vue-next';
-import Logo from '../../components/Logo.vue';
+import Logo from '../../components/common/Logo.vue';
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import FormError from '../../components/feedback/FormError.vue';
@@ -26,7 +26,7 @@ async function handleRegister() {
     try {
         await userStore.register(form);
 
-        router.push('/home');
+        router.push('/dashboard');
     } catch (error) {
         errors.value = error;
     } finally {

@@ -1,6 +1,6 @@
 <script setup>
 import { ArrowLeft, Lock, Mail } from 'lucide-vue-next';
-import Logo from '../../components/Logo.vue';
+import Logo from '../../components/common/Logo.vue';
 import { useRouter } from 'vue-router';
 import { reactive, ref } from 'vue';
 import FormError from '../../components/feedback/FormError.vue';
@@ -24,7 +24,7 @@ async function handleLogin() {
     try {
         await userStore.login(form);
 
-        router.push('/home');
+        router.push('/dashboard');
     } catch (error) {
         errors.value = error;
     } finally {

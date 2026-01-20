@@ -13,7 +13,8 @@ export const useUserStore = defineStore('user', () => {
         return user.value.name.split(' ')[0];
     });
     const userEmail = computed(() => user.value?.email);
-
+    const userSequence = computed(() => user.value?.sequence || 1);
+    
     function setUser(data) {
         user.value = data;
         isLoaded.value = true;
@@ -68,6 +69,7 @@ export const useUserStore = defineStore('user', () => {
         userName,
         userPreferredName,
         userEmail,
+        userSequence,
         setUser,
         login,
         register,
