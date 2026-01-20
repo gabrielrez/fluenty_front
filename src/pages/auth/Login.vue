@@ -3,7 +3,7 @@ import { ArrowLeft, Lock, Mail } from 'lucide-vue-next';
 import Logo from '../../components/Logo.vue';
 import { useRouter } from 'vue-router';
 import { reactive, ref } from 'vue';
-import FormError from '../../components/Feedback/FormError.vue';
+import FormError from '../../components/feedback/FormError.vue';
 import { useUserStore } from '../../stores/user';
 
 const router = useRouter();
