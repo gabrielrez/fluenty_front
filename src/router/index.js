@@ -15,7 +15,10 @@ const routes = [
         path: '/home',
         name: 'Home',
         component: Home,
-        meta: { requiresAuth: true },
+        meta: {
+            requiresAuth: true,
+            breadcrumb: 'Início',
+        },
     },
     {
         path: '/login',
