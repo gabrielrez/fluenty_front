@@ -1,5 +1,5 @@
 <template>
-    <div class="px-32">
+    <div class="lg:px-32">
         <h1 class="text-2xl sm:text-3xl font-extrabold">
             Dicionário Pessoal
         </h1>
