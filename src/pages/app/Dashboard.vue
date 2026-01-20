@@ -14,10 +14,10 @@ const sequenceMessage = computed(() => {
 
 <template>
     <div>
-        <h1 class="text-3xl font-extrabold">
+        <h1 class="text-2xl sm:text-3xl font-extrabold">
             Welcome back, <span class="text-[#1D56C9]">{{ userStore.userPreferredName }}</span> 👋
         </h1>
-        <p class="mt-2 text-[#6B778F]">
+        <p class="mt-2 text-[#6B778F] text-sm sm:text-base">
             {{ sequenceMessage }}
         </p>
     </div>

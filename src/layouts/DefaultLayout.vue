@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import Sidebar from '../components/layout/Sidebar.vue';
 import { MenuIcon } from 'lucide-vue-next';
+import Logo from '../components/common/Logo.vue';
 
 const isSidebarOpen = ref(false);
 
@@ -16,9 +17,10 @@ const isSidebarOpen = ref(false);
                 <button @click="isSidebarOpen = true" class="flex items-center gap-1 bg-[#142952] p-2 rounded-lg">
                     <menu-icon class="w-6 h-6 text-white" />
                 </button>
+                <logo to="/dashboard"/>
             </header>
 
-            <main class="flex-1 p-6">
+            <main class="flex-1 p-4 sm:p-6">
                 <router-view />
             </main>
         </div>
