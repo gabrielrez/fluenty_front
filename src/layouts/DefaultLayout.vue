@@ -9,7 +9,7 @@ const isSidebarOpen = ref(false);
 </script>
 
 <template>
-    <div class="flex min-h-screen bg-[#F9FAFB]">
+    <div class="flex min-h-screen overflow-hidden bg-[#F9FAFB]">
         <Sidebar :open="isSidebarOpen" @close="isSidebarOpen = false" />
 
         <div class="flex flex-col flex-1">
@@ -20,7 +20,7 @@ const isSidebarOpen = ref(false);
                 <logo to="/dashboard"/>
             </header>
 
-            <main class="flex-1 p-4 sm:p-6">
+            <main class="flex-1 ml-0 md:ml-64 p-4 sm:p-6 overflow-y-auto">
                 <router-view />
             </main>
         </div>

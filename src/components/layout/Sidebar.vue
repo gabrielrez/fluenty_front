@@ -33,8 +33,8 @@ async function handleLogout() {
     <div v-if="open" @click="emit('close')" class="fixed inset-0 bg-black/40 z-40 md:hidden" />
 
     <aside class="
-            fixed md:static top-0 left-0 z-50
-            h-screen w-64
+            fixed top-0 left-0 
+            z-50 h-screen w-64
             bg-[#142952]
             px-2 py-4
             transform transition-transform duration-300
