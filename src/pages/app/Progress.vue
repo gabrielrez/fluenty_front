@@ -7,4 +7,10 @@
             Acompanhe sua jornada de aprendizado e veja o quanto você já progrediu.
         </p>
     </div>
+    <div>
+        <div class="block mt-6 bg-gray-200 w-full h-60 rounded-xl">
+        </div>
+        <div class="block mt-8 bg-gray-200 w-full h-42 rounded-xl">
+        </div>
+    </div>
 </template>
