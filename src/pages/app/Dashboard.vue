@@ -2,6 +2,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { useUserStore } from '../../stores/user';
 import LessonCard from '../../components/common/LessonCard.vue';
+import LessonCardSkeleton from '../../components/skeletons/LessonCardSkeleton.vue';
 import { api } from '../../lib/api';
 
 const userStore = useUserStore();
@@ -48,10 +49,8 @@ const sequenceMessage = computed(() => {
     <section class="mt-10">
         <h3 class="text-xl font-semibold">Continue Aprendendo</h3>
         <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div v-if="isLoading" class="col-span-full text-center text-gray-400 italic">
-                Carregando Lessons...
-            </div>
-
+            <LessonCardSkeleton v-if="isLoading" v-for="n in 2" :key="n" />
+            
             <div v-else-if="lessons.length === 0" class="col-span-full text-center text-gray-400 italic">
                 Você ainda não começou nenhuma Lesson.
             </div>
