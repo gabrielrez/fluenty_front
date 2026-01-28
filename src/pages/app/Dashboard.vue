@@ -4,6 +4,7 @@ import { useUserStore } from '../../stores/user';
 import LessonCard from '../../components/common/LessonCard.vue';
 import LessonCardSkeleton from '../../components/skeletons/LessonCardSkeleton.vue';
 import { api } from '../../lib/api';
+import { ArrowRight } from 'lucide-vue-next';
 
 const userStore = useUserStore();
 
@@ -50,12 +51,17 @@ const sequenceMessage = computed(() => {
         <h3 class="text-xl font-semibold">Continue Aprendendo</h3>
         <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <LessonCardSkeleton v-if="isLoading" v-for="n in 2" :key="n" />
-            
+
             <div v-else-if="lessons.length === 0" class="col-span-full text-center text-gray-400 italic">
                 Você ainda não começou nenhuma Lesson.
             </div>
 
             <LessonCard v-else v-for="lesson in lessons" :key="lesson.id" :lesson="lesson" />
+
+            <router-link to="/library" class="justify-self-end text-[#1D56C9] hover:underline">
+                Ver todos
+                <ArrowRight class="inline-block w-4 h-4 ml-1" />
+            </router-link>
         </div>
     </section>
 </template>
