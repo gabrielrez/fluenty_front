@@ -14,7 +14,7 @@ export const useUserStore = defineStore('user', () => {
     });
     const userEmail = computed(() => user.value?.email);
     const userSequence = computed(() => user.value?.sequence || 1);
-    
+
     function setUser(data) {
         user.value = data;
         isLoaded.value = true;
@@ -54,7 +54,7 @@ export const useUserStore = defineStore('user', () => {
     async function fetchUser() {
         try {
             const { data } = await api.get('/users/profile');
-            user.value = data.user;
+            user.value = data.data;
         } catch {
             logout();
         } finally {
