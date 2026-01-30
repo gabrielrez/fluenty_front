@@ -58,10 +58,12 @@ const sequenceMessage = computed(() => {
 
             <LessonCard v-else v-for="lesson in lessons" :key="lesson.id" :lesson="lesson" />
 
-            <router-link to="/library" class="justify-self-end text-[#1D56C9] hover:underline">
-                Ver todos
-                <ArrowRight class="inline-block w-4 h-4 ml-1" />
-            </router-link>
+            <div class="justify-self-end">
+                <router-link to="/library" class="text-[#1D56C9] hover:underline">
+                    Ver todos
+                    <ArrowRight class="inline-block w-4 h-4 ml-1" />
+                </router-link>
+            </div>
         </div>
     </section>
 </template>
