@@ -14,22 +14,33 @@ const filters = reactive({
     search: '',
     level: '',
     category: '',
-})
+    status: '',
+    notStarted: false,
+});
 
 const hasActiveFilters = computed(() => {
-    return !!filters.level || !!filters.category
-})
+    return (
+        !!filters.level ||
+        !!filters.category ||
+        !!filters.status ||
+        filters.notStarted
+    );
+});
 
 const activeFiltersCount = computed(() => {
     let count = 0
     if (filters.level) count++
     if (filters.category) count++
+    if (filters.status) count++
+    if (filters.notStarted) count++
     return count
-})
+});
 
 const clearFilters = () => {
     filters.level = ''
     filters.category = ''
+    filters.status = ''
+    filters.notStarted = false
 }
 
 const levels = [
@@ -45,6 +56,8 @@ const fetchLessons = async () => {
             search: filters.search || undefined,
             level: filters.level || undefined,
             category: filters.category || undefined,
+            status: filters.notStarted ? undefined : filters.status || undefined,
+            not_started: filters.notStarted ? true : undefined,
         },
     })
     lessons.value = data.data
@@ -64,6 +77,16 @@ const toggleCategory = (id) => {
     filters.category = filters.category === id ? '' : id
 }
 
+const toggleStatus = (value) => {
+    filters.notStarted = false
+    filters.status = filters.status === value ? '' : value
+}
+
+const toggleNotStarted = () => {
+    filters.status = ''
+    filters.notStarted = !filters.notStarted
+}
+
 onMounted(async () => {
     await Promise.all([fetchLessons(), fetchCategories()])
 })
@@ -79,7 +102,7 @@ watch(
 )
 
 watch(
-    () => [filters.level, filters.category],
+    () => [filters.level, filters.category, filters.status, filters.notStarted],
     fetchLessons
 )
 </script>
@@ -117,6 +140,35 @@ watch(
     </div>
 
     <div v-if="showFilters" class="border border-[#E0E5EE] rounded-2xl p-4 sm:p-6 mb-10 space-y-6">
+        <div>
+            <p class="text-sm font-semibold mb-3">Status de estudo</p>
+
+            <div class="flex flex-col sm:flex-row flex-wrap gap-2">
+                <!-- Concluído -->
+                <button @click="toggleStatus('completed')"
+                    class="px-4 py-2 rounded-lg text-sm border transition cursor-pointer w-full sm:w-auto" :class="filters.status === 'completed'
+                        ? 'bg-[#E2F3ED] text-[#39AC86] border-[#39AC86]'
+                        : 'border-[#E0E5EE] text-[#334155] hover:bg-[#F5F7FA]'">
+                    Concluído
+                </button>
+
+                <!-- Em progresso -->
+                <button @click="toggleStatus('in_progress')"
+                    class="px-4 py-2 rounded-lg text-sm border transition cursor-pointer w-full sm:w-auto" :class="filters.status === 'in_progress'
+                        ? 'bg-[#FEF1DA] text-[#F59F0A] border-[#F59F0A]'
+                        : 'border-[#E0E5EE] text-[#334155] hover:bg-[#F5F7FA]'">
+                    Em progresso
+                </button>
+
+                <!-- Não iniciado -->
+                <button @click="toggleNotStarted"
+                    class="px-4 py-2 rounded-lg text-sm border transition cursor-pointer w-full sm:w-auto" :class="filters.notStarted
+                        ? 'bg-[#E9F2FF] border-[#3B82F6] text-[#1D4ED8]'
+                        : 'border-[#E0E5EE] text-[#334155] hover:bg-[#F5F7FA]'">
+                    Não iniciado
+                </button>
+            </div>
+        </div>
         <div>
             <p class="text-sm font-semibold mb-3">Level</p>
             <div class="flex flex-col sm:flex-row flex-wrap gap-2">
