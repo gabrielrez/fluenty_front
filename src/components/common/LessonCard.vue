@@ -97,7 +97,7 @@ const statusConfig = (status) => {
                 </div>
 
                 <span class="font-semibold text-xs" :style="{ color: statusConfig(lesson.status).color }">
-                    {{ statusConfig(lesson.status).label }}
+                    {{ statusConfig(lesson.status).label || 'Não iniciado' }}
                 </span>
             </div>
         </div>
