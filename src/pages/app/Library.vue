@@ -10,6 +10,33 @@ const categories = ref([])
 const isLoading = ref(false)
 const showFilters = ref(false)
 
+const pagination = reactive({
+    currentPage: 1,
+    lastPage: 1,
+    total: 0,
+})
+
+const goToPage = (page) => {
+    if (page < 1 || page > pagination.lastPage) return
+    pagination.currentPage = page
+    fetchLessons(page)
+    scrollToTop()
+}
+
+const nextPage = () => goToPage(pagination.currentPage + 1)
+const prevPage = () => goToPage(pagination.currentPage - 1)
+
+const itemsCounter = computed(() => {
+    return `${lessons.value.length} de ${pagination.total}`
+})
+
+const scrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+    })
+}
+
 const filters = reactive({
     search: '',
     level: '',
@@ -49,10 +76,11 @@ const levels = [
     { label: 'Avançado', value: 'advanced' },
 ]
 
-const fetchLessons = async () => {
+const fetchLessons = async (page = pagination.currentPage) => {
     isLoading.value = true
     const { data } = await api.get('/lessons', {
         params: {
+            page,
             search: filters.search || undefined,
             level: filters.level || undefined,
             category: filters.category || undefined,
@@ -61,6 +89,11 @@ const fetchLessons = async () => {
         },
     })
     lessons.value = data.data
+
+    pagination.currentPage = data.meta.current_page
+    pagination.lastPage = data.meta.last_page
+    pagination.total = data.meta.total
+
     isLoading.value = false
 }
 
@@ -97,13 +130,19 @@ watch(
     () => filters.search,
     () => {
         clearTimeout(searchTimeout)
-        searchTimeout = setTimeout(fetchLessons, 400)
+        searchTimeout = setTimeout(() => {
+            pagination.currentPage = 1
+            fetchLessons(1)
+        }, 400)
     }
 )
 
 watch(
     () => [filters.level, filters.category, filters.status, filters.notStarted],
-    fetchLessons
+    () => {
+        pagination.currentPage = 1
+        fetchLessons(1)
+    }
 )
 </script>
 
@@ -144,7 +183,6 @@ watch(
             <p class="text-sm font-semibold mb-3">Status de estudo</p>
 
             <div class="flex flex-col sm:flex-row flex-wrap gap-2">
-                <!-- Concluído -->
                 <button @click="toggleStatus('completed')"
                     class="px-4 py-2 rounded-lg text-sm border transition cursor-pointer w-full sm:w-auto" :class="filters.status === 'completed'
                         ? 'bg-[#E2F3ED] text-[#39AC86] border-[#39AC86]'
@@ -152,7 +190,6 @@ watch(
                     Concluído
                 </button>
 
-                <!-- Em progresso -->
                 <button @click="toggleStatus('in_progress')"
                     class="px-4 py-2 rounded-lg text-sm border transition cursor-pointer w-full sm:w-auto" :class="filters.status === 'in_progress'
                         ? 'bg-[#FEF1DA] text-[#F59F0A] border-[#F59F0A]'
@@ -160,7 +197,6 @@ watch(
                     Em progresso
                 </button>
 
-                <!-- Não iniciado -->
                 <button @click="toggleNotStarted"
                     class="px-4 py-2 rounded-lg text-sm border transition cursor-pointer w-full sm:w-auto" :class="filters.notStarted
                         ? 'bg-[#E9F2FF] border-[#3B82F6] text-[#1D4ED8]'
@@ -203,8 +239,34 @@ watch(
         </div>
     </div>
 
+    <div class="flex items-center justify-between mb-4">
+        <p class="text-sm text-[#6B778F]">
+            Exibindo <span class="font-semibold">{{ itemsCounter }}</span> lições
+        </p>
+    </div>
+
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <LessonCardSkeleton v-if="isLoading" v-for="n in 6" :key="n" />
         <LessonCard v-else v-for="lesson in lessons" :key="lesson.id" :lesson="lesson" />
+    </div>
+
+    <div v-if="pagination.lastPage > 1" class="flex items-center justify-center gap-2 mt-10 flex-wrap">
+
+        <button @click="prevPage" :disabled="pagination.currentPage === 1"
+            class="px-3 py-2 rounded-lg text-sm border disabled:opacity-50 cursor-pointer">
+            Anterior
+        </button>
+
+        <button v-for="page in pagination.lastPage" :key="page" @click="goToPage(page)"
+            class="px-4 py-2 rounded-lg text-sm border" :class="pagination.currentPage === page
+                ? 'bg-[#243B6B] text-white border-[#243B6B]'
+                : 'border-[#E0E5EE] text-[#334155] hover:bg-[#F5F7FA]'">
+            {{ page }}
+        </button>
+
+        <button @click="nextPage" :disabled="pagination.currentPage === pagination.lastPage"
+            class="px-3 py-2 rounded-lg text-sm border disabled:opacity-50 cursor-pointer">
+            Próxima
+        </button>
     </div>
 </template>
