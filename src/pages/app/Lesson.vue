@@ -1,6 +1,6 @@
 <script setup>
 import { ArrowLeft, HeadphonesIcon } from 'lucide-vue-next'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { api } from '../../lib/api'
 
@@ -46,9 +46,38 @@ const fetchLesson = async () => {
     isLoading.value = false
 }
 
+const saveWord = async (word) => {
+    console.log(word)
+}
+
 onMounted(async () => {
     await fetchLesson()
 })
+
+const paragraphs = computed(() => {
+    if (!lesson.value?.text) return []
+    return lesson.value.text
+        .split('\n\n')
+        .map(p => p.trim())
+        .filter(Boolean)
+})
+
+const isWhitespace = (text) => /^\s+$/.test(text)
+
+const normalizeWord = (word) => {
+    return word
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-zA-Z]/g, '')
+        .trim()
+}
+
+const handleWordClick = (word) => {
+    const clean = normalizeWord(word)
+    if (!clean) return
+    saveWord(clean)
+}
 </script>
 
 
@@ -93,9 +122,24 @@ onMounted(async () => {
 
             <div class="mt-6 rounded-xl h-17 border border-[#E0E5EE]"></div>
 
-            <div class="mt-6 rounded-xl h-100 bg-[#F6F7F8] border border-[#E0E5EE]"></div>
+            <div class="mt-6 p-5 sm:p-8 md:p-10 rounded-xl bg-[#F6F7F8] border border-[#E0E5EE] font-[Libre_Baskerville]">
+                <p v-for="(paragraph, pIndex) in paragraphs" :key="pIndex"
+                    class="mb-6 last:mb-0 wrap-break-word text-md sm:text-lg leading-relaxed">
+                    <span v-for="(word, wIndex) in paragraph.split(/(\s+)/)" :key="`${pIndex}-${wIndex}`"
+                        @click="handleWordClick(word)" :class="[
+                            'rounded-sm transition-all whitespace-pre-wrap',
+                            isWhitespace(word)
+                                ? 'cursor-default'
+                                : 'cursor-pointer hover:bg-[#1d56c91f]'
+                        ]">
+                        {{ word }}
+                    </span>
+                </p>
+            </div>
 
-            <button class="block mx-auto mt-12 bg-[#1D56C9] hover:bg-[#3367CE] px-6 py-2.5 rounded-xl text-white cursor-pointer transition-all">Marcar como concluída</button>
+            <button
+                class="block mx-auto mt-12 bg-[#1D56C9] hover:bg-[#3367CE] px-6 py-2.5 rounded-xl text-white cursor-pointer transition-all">Marcar
+                como concluída</button>
         </div>
     </div>
 </template>
