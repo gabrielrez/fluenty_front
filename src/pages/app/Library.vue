@@ -19,8 +19,8 @@ const pagination = reactive({
 const goToPage = (page) => {
     if (page < 1 || page > pagination.lastPage) return
     pagination.currentPage = page
-    fetchLessons(page)
     scrollToTop()
+    fetchLessons(page)
 }
 
 const nextPage = () => goToPage(pagination.currentPage + 1)

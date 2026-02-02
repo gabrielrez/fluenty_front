@@ -9,6 +9,7 @@ import Login from '../pages/auth/Login.vue'
 import Register from '../pages/auth/Register.vue'
 import DefaultLayout from '../layouts/DefaultLayout.vue'
 import Dictionary from '../pages/app/Dictionary.vue'
+import Lesson from '../pages/app/Lesson.vue'
 
 const routes = [
     {
@@ -40,6 +41,13 @@ const routes = [
             {
                 path: '/library',
                 component: Library,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            {
+                path: '/lesson/:id',
+                component: Lesson,
                 meta: {
                     requiresAuth: true
                 }

@@ -60,7 +60,7 @@ const statusConfig = (status) => {
 </script>
 
 <template>
-    <div
+    <router-link :to="`/lesson/${lesson.id}`"
         class="border border-[#E0E5EE] rounded-xl overflow-hidden cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-lg">
         <img class="w-full h-40 object-cover" :src="lesson.image_url" :alt="lesson.title" />
 
@@ -83,7 +83,7 @@ const statusConfig = (status) => {
             </h4>
 
             <p class="mt-2 text-[#6B778F] text-sm line-clamp-2">
-                {{ lesson.text }}
+                {{ lesson.text.length > 84 ? lesson.text.slice(0, 84) + '...' : lesson.text }}
             </p>
 
             <span class="block w-full h-px bg-[#E0E5EE] opacity-50 my-4"></span>
@@ -101,5 +101,5 @@ const statusConfig = (status) => {
                 </span>
             </div>
         </div>
-    </div>
+    </router-link>
 </template>
