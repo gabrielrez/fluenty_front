@@ -17,6 +17,7 @@ onMounted(async () => {
     const { data } = await api.get('/lessons', {
         params: {
             only_started: true,
+            latest: true,
             per_page: 2,
         }
     });
