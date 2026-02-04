@@ -1,4 +1,5 @@
 <script setup>
+import confetti from 'canvas-confetti'
 import { ArrowLeft, HeadphonesIcon } from 'lucide-vue-next'
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
@@ -7,12 +8,30 @@ import { api } from '../../lib/api'
 const route = useRoute()
 const lessonId = route.params.id
 
+const completeButtonRef = ref(null)
 const isLoading = ref(false)
 const isStartingLesson = ref(false)
 const isTogglingComplete = ref(false)
 
 const lesson = ref(null)
 const isCompleted = ref(false)
+
+const fireConfettiFromButton = () => {
+    const button = completeButtonRef.value
+    if (!button) return
+
+    const rect = button.getBoundingClientRect()
+
+    const x = (rect.left + rect.width / 2) / window.innerWidth
+    const y = (rect.top + rect.height / 2) / window.innerHeight
+
+    confetti({
+        particleCount: 120,
+        spread: 360,
+        startVelocity: 35,
+        origin: { x, y }
+    })
+}
 
 const levelConfig = (level) => {
     const map = {
@@ -68,8 +87,14 @@ const toggleCompleteLesson = async () => {
 
         const { data } = await api.post(`/lessons/${lessonId}/toggle-complete`)
 
+        const wasCompleted = isCompleted.value
+
         isCompleted.value = data.completed
         lesson.value.status = data.status
+
+        if (!wasCompleted && data.completed) {
+            fireConfettiFromButton()
+        }
     } finally {
         isTogglingComplete.value = false
     }
@@ -160,7 +185,7 @@ onMounted(async () => {
                 </p>
             </div>
 
-            <button @click="toggleCompleteLesson" :disabled="isTogglingComplete"
+            <button ref="completeButtonRef" @click="toggleCompleteLesson" :disabled="isTogglingComplete"
                 class="block mx-auto mt-12 px-6 py-3 rounded-xl text-white font-semibold cursor-pointer transition-all"
                 :class="isCompleted
                     ? 'bg-[#39AC86] hover:bg-[#4ebe99]'
