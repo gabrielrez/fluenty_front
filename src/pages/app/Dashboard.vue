@@ -59,10 +59,10 @@ const sequenceMessage = computed(() => {
 
             <LessonCard v-else v-for="lesson in lessons" :key="lesson.id" :lesson="lesson" />
 
-            <div class="justify-self-end">
-                <router-link to="/library" class="text-[#1D56C9] hover:underline">
+            <div
+                class="min-h-89 flex justify-center items-center border border-[#E0E5EE] rounded-xl overflow-hidden cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-lg">
+                <router-link to="/library" class="text-[#6B778F]">
                     Ver todos
-                    <ArrowRight class="inline-block w-4 h-4 ml-1" />
                 </router-link>
             </div>
         </div>
