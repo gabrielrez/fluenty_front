@@ -4,6 +4,7 @@ import { ArrowLeft, HeadphonesIcon } from 'lucide-vue-next'
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { api } from '../../lib/api'
+import AudioPlayer from '../../components/common/AudioPlayer.vue'
 
 const route = useRoute()
 const lessonId = route.params.id
@@ -169,6 +170,8 @@ onMounted(async () => {
             </h1>
 
             <img class="mt-8 w-full h-40 md:h-80 rounded-xl object-cover" :src="lesson.image_url" :alt="lesson.title" />
+
+            <AudioPlayer :lesson="lesson" />
 
             <div class="mt-6 p-8 rounded-xl bg-[#F6F7F8] border border-[#E0E5EE] font-[Libre_Baskerville]">
                 <p v-for="(paragraph, pIndex) in paragraphs" :key="pIndex"
