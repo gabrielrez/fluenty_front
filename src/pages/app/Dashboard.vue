@@ -1,10 +1,9 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 import { useUserStore } from '../../stores/user';
-import LessonCard from '../../components/common/LessonCard.vue';
+import LessonCard from '../../components/lesson/LessonCard.vue';
 import LessonCardSkeleton from '../../components/skeletons/LessonCardSkeleton.vue';
 import { api } from '../../lib/api';
-import { ArrowRight } from 'lucide-vue-next';
 
 const userStore = useUserStore();
 

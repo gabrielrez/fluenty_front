@@ -84,25 +84,31 @@ watch(
 </script>
 
 <template>
-    <div class="mt-6 border border-[#E0E5EE] rounded-xl shadow-sm px-6 py-4 flex items-center gap-4">
-        <button @click="togglePlay" class="w-12 h-12 flex items-center justify-center rounded-full
-                   bg-[#1D56C9] text-white hover:bg-[#164ebd] cursor-pointer transition-all">
+    <div class="mt-6 border border-[#E0E5EE] rounded-xl shadow-sm
+               px-4 py-4 sm:px-6
+               flex flex-col sm:flex-row
+               sm:items-center gap-3 sm:gap-4">
+        <button @click="togglePlay" class="w-12 h-12 shrink-0 flex items-center justify-center rounded-full
+                   bg-[#1D56C9] text-white hover:bg-[#164ebd]
+                   cursor-pointer transition-all mx-auto sm:mx-0">
             {{ isPlaying ? '❚❚' : '▶' }}
         </button>
 
-        <span class="text-xs text-[#6B778F] w-10 text-center">
-            {{ formatTime(currentTime) }}
-        </span>
+        <div class="flex items-center gap-3 w-full">
+            <span class="text-xs text-[#6B778F] w-10 text-center">
+                {{ formatTime(currentTime) }}
+            </span>
 
-        <input type="range" min="0" max="100" step="0.1" v-model="progress" @input="seek" class="audio-range flex-1"
-            :style="progressStyle" />
+            <input type="range" min="0" max="100" step="0.1" v-model="progress" @input="seek" class="audio-range flex-1"
+                :style="progressStyle" />
 
-        <span class="text-xs text-[#6B778F] w-10 text-center">
-            {{ formatTime(duration) }}
-        </span>
+            <span class="text-xs text-[#6B778F] w-10 text-center">
+                {{ formatTime(duration) }}
+            </span>
+        </div>
 
-        <input type="range" min="0" max="1" step="0.01" v-model="volume" @input="changeVolume" class="audio-range w-24"
-            :style="volumeStyle" />
+        <input type="range" min="0" max="1" step="0.01" v-model="volume" @input="changeVolume"
+            class="audio-range w-24 hidden sm:block" :style="volumeStyle" />
 
         <audio ref="audioRef" :src="audioSrc" preload="metadata" @loadedmetadata="onLoadedMetadata"
             @timeupdate="onTimeUpdate" @ended="onEnded" />

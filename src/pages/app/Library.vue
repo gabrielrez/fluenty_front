@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 import LessonCardSkeleton from '../../components/skeletons/LessonCardSkeleton.vue'
-import LessonCard from '../../components/common/LessonCard.vue'
+import LessonCard from '../../components/lesson/LessonCard.vue'
 import { api } from '../../lib/api'
 import { Filter, X } from 'lucide-vue-next'
 
