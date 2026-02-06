@@ -1,21 +1,42 @@
 <script setup>
 import { BookmarkPlus } from 'lucide-vue-next';
+import { ref, watch } from 'vue';
+import { api } from '../../lib/api';
 
-defineProps({
-    modelValue: {
-        type: Boolean,
-        required: true,
-    },
+const props = defineProps({
+    modelValue: Boolean,
     word: String,
     context: String,
-})
+});
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue']);
+const translation = ref('');
 
 function close() {
-    emit('update:modelValue', false)
+    emit('update:modelValue', false);
 }
+
+const translateWord = async () => {
+    if (!props.word) return;
+    
+    translation.value = 'Carregando...';
+
+    try {
+        const { data } = await api.post('/words/translate', { text: props.word });
+        translation.value = data.translation;
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+watch(
+    () => props.modelValue,
+    (isOpen) => {
+        if (isOpen && props.word) translateWord();
+    }
+);
 </script>
+
 
 <template>
     <transition name="fade">
@@ -39,7 +60,7 @@ function close() {
                         </label>
                         <input type="text" id="word"
                             class="mt-2.5 block w-full rounded-xl border border-[#E0E5EE] p-2.5 text-sm"
-                            :value="word" />
+                            :value="props.word" />
                     </div>
 
                     <div class="mt-6">
@@ -47,7 +68,7 @@ function close() {
                             Contexto
                         </label>
                         <p class="mt-2.5 border-l-3 border-[#C0D0ED] pl-2 w-full italic text-sm text-[#6B778F]">
-                            "{{ context }}"
+                            "{{ props.context }}"
                         </p>
                     </div>
 
@@ -55,9 +76,9 @@ function close() {
                         <label for="translation" class="block text-sm font-medium text-[#6B778F]">
                             Tradução
                         </label>
-                        <input type="text" id="translation"
+                        <input type="text" id="translation" v-model="translation"
                             class="mt-2.5 block w-full rounded-xl border border-[#E0E5EE] p-2.5 text-sm"
-                            :value="word" />
+                            placeholder="Carregando..." />
                     </div>
 
                     <button
