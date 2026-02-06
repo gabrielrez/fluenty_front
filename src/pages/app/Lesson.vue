@@ -134,8 +134,7 @@ onMounted(fetchLesson)
 
             <TranslationToolbar :isTranslated="isTranslated" @toggle="isTranslated = !isTranslated" />
 
-            <LessonText :paragraphPairs="paragraphPairs" :isTranslated="isTranslated" :isWhitespace="isWhitespace"
-                @word-click="handleWordClick" />
+            <LessonText :paragraphPairs="paragraphPairs" :isTranslated="isTranslated" :isWhitespace="isWhitespace" />
 
             <button ref="completeButtonRef" @click="toggleCompleteLesson"
                 class="block mx-auto mt-12 px-6 py-3 rounded-xl text-white font-semibold cursor-pointer hover:scale-95 transition-all"
