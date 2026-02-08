@@ -11,6 +11,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
+const isTranslated = ref(false)
 const translation = ref('')
 const isSaved = ref(null)
 const isSaving = ref(false)
@@ -26,14 +27,17 @@ const loadWordState = async () => {
         const { data } = await api.get(`/words/${props.word}`)
         isSaved.value = data.saved
         translation.value = data.translation ?? ''
+        isTranslated.value = !!data.translation
     } catch {
         isSaved.value = false
+        isTranslated.value = false
     }
 }
 
 const translateWord = async () => {
     if (!props.word) return
 
+    isTranslated.value = false
     translation.value = 'Carregando...'
 
     const { data } = await api.post('/words/translate', {
@@ -41,21 +45,22 @@ const translateWord = async () => {
     })
 
     translation.value = data.translation
+    isTranslated.value = true
 }
 
-const toggleSaveWord = async () => {
+const saveWord = async () => {
     if (!props.word || !props.context || !translation.value) return
 
     isSaving.value = true
 
     try {
-        const { data } = await api.post('/words/toggle', {
+        await api.post('/words/save', {
             word: props.word,
             context: props.context,
             translation: translation.value,
         })
 
-        isSaved.value = data.saved
+        isSaved.value = true
     } finally {
         isSaving.value = false
     }
@@ -68,6 +73,7 @@ watch(
 
         isSaved.value = null
         translation.value = ''
+        isTranslated.value = false
 
         await loadWordState()
 
@@ -121,18 +127,18 @@ watch(
                             class="mt-2.5 block w-full rounded-xl border border-[#E0E5EE] p-2.5 text-sm" />
                     </div>
 
-                    <button v-if="isSaved !== null" type="button" @click="toggleSaveWord" :disabled="isSaving"
-                        class="flex items-center gap-2 self-end px-4 py-2.5 rounded-xl mt-8 transition-all cursor-pointer disabled:cursor-not-allowed"
-                        :class="{
-                            'bg-[#1D56C9] hover:bg-[#2c64d5] text-white': !isSaved,
-                            'bg-[#39AC86] hover:bg-[#2c9975] text-white': isSaved,
-                            'opacity-50': isSaving
-                        }">
-                        <BookmarkPlus v-if="!isSaving && !isSaved" class="w-4 h-4" />
-                        <BookmarkCheck v-else-if="!isSaving && isSaved" class="w-4 h-4" />
+                    <router-link v-if="isSaved" to="/dictionary" class="flex items-center gap-2 self-end px-4 py-2.5 rounded-xl mt-8 transition-all
+           bg-[#39AC86] hover:bg-[#2c9975] text-white">
+                        <BookmarkCheck class="w-4 h-4" />
+                        <span>Ver Dicionário</span>
+                    </router-link>
 
-                        <span v-if="isSaving">Processando...</span>
-                        <span v-else-if="isSaved">Ver Dicionário</span>
+                    <button v-else-if="isSaved === false" type="button" @click="saveWord"
+                        :disabled="isSaving || !isTranslated" class="flex items-center gap-2 self-end px-4 py-2.5 rounded-xl mt-8 transition-all cursor-pointer
+           bg-[#1D56C9] hover:bg-[#2c64d5] text-white
+           disabled:opacity-50 disabled:cursor-not-allowed">
+                        <BookmarkPlus v-if="!isSaving" class="w-4 h-4" />
+                        <span v-if="isSaving">Salvando...</span>
                         <span v-else>Salvar Palavra</span>
                     </button>
                 </form>

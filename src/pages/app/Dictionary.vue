@@ -1,3 +1,44 @@
+<script setup lang="ts">
+import { BookOpenCheckIcon, TrashIcon } from 'lucide-vue-next'
+import { onMounted, ref } from 'vue'
+import { api } from '../../lib/api'
+
+type SavedWord = {
+    id: number
+    word: string
+    translation: string
+    context: string
+    created_at: string
+}
+
+const words = ref<SavedWord[]>([])
+const isLoading = ref(true)
+
+async function fetchWords() {
+    try {
+        const { data } = await api.get('/words')
+        words.value = data.data
+        console.log(data.data)
+    } finally {
+        isLoading.value = false
+    }
+}
+
+async function deleteWord(item: SavedWord) {
+    const previous = [...words.value]
+
+    words.value = words.value.filter(word => word.id !== item.id)
+
+    try {
+        await api.delete(`/words/${item.id}`)
+    } catch {
+        words.value = previous
+    }
+}
+
+onMounted(fetchWords)
+</script>
+
 <template>
     <div class="lg:px-32">
         <div>
@@ -8,9 +49,47 @@
                 Suas palavras e traduções salvas para revisão.
             </p>
         </div>
-        <div class="block mt-8 bg-gray-200 w-full h-22 rounded-xl">
+
+        <div class="flex items-center gap-3 mt-8 border border-[#E0E5EE] w-full px-4 py-6 rounded-xl">
+            <div class="flex justify-center items-center w-max bg-[#E8EEF9] p-2.5 rounded-xl">
+                <BookOpenCheckIcon class="w-7 h-7 text-[#1D56C9]" />
+            </div>
+            <div>
+                <h3 class="font-semibold text-2xl">
+                    {{ words.length }}
+                </h3>
+                <p class="text-sm text-[#6B778F]">Palavras salvas</p>
+            </div>
         </div>
-        <div class="block mt-6 bg-gray-200 w-full h-10 rounded-xl">
+
+        <div v-if="isLoading" class="mt-6 space-y-4">
+            <div class="bg-gray-200 h-24 rounded-xl animate-pulse" />
+            <div class="bg-gray-200 h-24 rounded-xl animate-pulse" />
+        </div>
+
+        <div v-else class="mt-6 space-y-4">
+            <div v-for="(item, index) in words" :key="index"
+                class="border border-[#E0E5EE] w-full px-4 py-6 rounded-xl">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-medium text-lg">
+                        {{ item.word }}
+                    </h3>
+                    <TrashIcon @click.prevent.stop="deleteWord(item)"
+                        class="w-5 h-5 text-[#6B778F] cursor-pointer hover:text-[#DD3C3C] transition-all" />
+                </div>
+
+                <span class="mt-3 block font-medium text-[#6B778F]">
+                    {{ item.translation }}
+                </span>
+
+                <p v-if="item.context" class="mt-2.5 border-l-3 pl-2 border-[#C0D0ED] text-[#6B778F] italic">
+                    "{{ item.context }}"
+                </p>
+            </div>
+
+            <p v-if="words.length === 0" class="text-center text-[#6B778F] mt-10">
+                Nenhuma palavra salva ainda 📘
+            </p>
         </div>
     </div>
 </template>
