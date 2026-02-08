@@ -24,7 +24,11 @@ const loadWordState = async () => {
     if (!props.word) return
 
     try {
-        const { data } = await api.get(`/words/${props.word}`)
+        const { data } = await api.get(`/words/${props.word}`, {
+            params: {
+                context: props.context,
+            },
+        })
         isSaved.value = data.saved
         translation.value = data.translation ?? ''
         isTranslated.value = !!data.translation
