@@ -14,6 +14,7 @@ export const useUserStore = defineStore('user', () => {
     });
     const userEmail = computed(() => user.value?.email);
     const userSequence = computed(() => user.value?.sequence || 1);
+    const userCreatedAt = computed(() => user.value?.created_at);
 
     function setUser(data) {
         user.value = data;
@@ -70,6 +71,7 @@ export const useUserStore = defineStore('user', () => {
         userPreferredName,
         userEmail,
         userSequence,
+        userCreatedAt,
         setUser,
         login,
         register,

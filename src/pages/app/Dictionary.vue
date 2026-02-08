@@ -54,7 +54,7 @@ async function deleteWord(item: SavedWord) {
     }
 }
 
-function formatDate(date: string) {
+function formatDate(date) {
     return new Date(date).toLocaleDateString('pt-BR', {
         day: '2-digit',
         month: 'short',
