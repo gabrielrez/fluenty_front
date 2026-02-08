@@ -7,6 +7,7 @@ const props = defineProps({
     modelValue: Boolean,
     word: String,
     context: String,
+    lessonId: Number,
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -62,6 +63,7 @@ const saveWord = async () => {
             word: props.word,
             context: props.context,
             translation: translation.value,
+            lesson_id: props.lessonId,
         })
 
         isSaved.value = true

@@ -6,6 +6,7 @@ const { paragraphPairs, isTranslated, isWhitespace } = defineProps({
     paragraphPairs: { type: Array, required: true },
     isTranslated: { type: Boolean, required: true },
     isWhitespace: { type: Function, required: true },
+    lessonId: { required: true },
 })
 
 const isOpen = ref(false)
@@ -56,5 +57,5 @@ const wordClick = (word, pIndex, wIndex) => {
         </div>
     </div>
 
-    <SaveWordModal v-model="isOpen" :word="selectedWord" :context="context" />
+    <SaveWordModal v-model="isOpen" :word="selectedWord" :context="context" :lessonId="lessonId" />
 </template>

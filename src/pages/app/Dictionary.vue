@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BookOpenCheckIcon, TrashIcon } from 'lucide-vue-next'
+import { BookOpenCheckIcon, Calendar, FileText, TrashIcon } from 'lucide-vue-next'
 import { onMounted, ref } from 'vue'
 import { api } from '../../lib/api'
 
@@ -34,6 +34,14 @@ async function deleteWord(item: SavedWord) {
     } catch {
         words.value = previous
     }
+}
+
+function formatDate(date) {
+    return new Date(date).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+    })
 }
 
 onMounted(fetchWords)
@@ -85,6 +93,22 @@ onMounted(fetchWords)
                 <p v-if="item.context" class="mt-2.5 border-l-3 pl-2 border-[#C0D0ED] text-[#6B778F] italic">
                     "{{ item.context }}"
                 </p>
+
+                <div class="mt-4 flex items-center gap-8">
+                    <div class="flex items-center gap-1">
+                        <Calendar class="w-4 h-4 text-[#6B778F]" stroke-width="1" />
+                        <span class="text-xs text-[#6B778F] font-light">
+                            {{ formatDate(item.created_at) }}
+                        </span>
+                    </div>
+                    <router-link :to="`/lesson/${item.lesson.id}`"
+                        class="group flex items-center gap-1 hover:text-[#1D56C9]">
+                        <FileText class="w-4 h-4 text-[#6B778F] group-hover:text-[#1D56C9]" stroke-width="1" />
+                        <span class="text-xs font-light text-[#6B778F] group-hover:text-[#1D56C9]">
+                            {{ item.lesson.title }}
+                        </span>
+                    </router-link>
+                </div>
             </div>
 
             <p v-if="words.length === 0" class="text-center text-[#6B778F] mt-10">
