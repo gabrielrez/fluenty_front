@@ -52,6 +52,12 @@ export const useUserStore = defineStore('user', () => {
         }
     }
 
+    async function updateUser(payload) {
+        const { data } = await api.put('/me/update', payload);
+        user.value = data.data;
+        return data;
+    }
+
     async function fetchUser() {
         try {
             const { data } = await api.get('/me');
@@ -76,6 +82,7 @@ export const useUserStore = defineStore('user', () => {
         login,
         register,
         logout,
+        updateUser,
         fetchUser,
     }
 });
