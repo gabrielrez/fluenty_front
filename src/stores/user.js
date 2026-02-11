@@ -54,7 +54,7 @@ export const useUserStore = defineStore('user', () => {
 
     async function fetchUser() {
         try {
-            const { data } = await api.get('/users/profile');
+            const { data } = await api.get('/me');
             user.value = data.data;
         } catch {
             logout();
