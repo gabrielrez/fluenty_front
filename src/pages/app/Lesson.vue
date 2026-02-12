@@ -7,6 +7,7 @@ import { api } from '../../lib/api'
 import AudioPlayer from '../../components/lesson/AudioPlayer.vue'
 import TranslationToolbar from '../../components/lesson/TranslationToolbar.vue'
 import LessonText from '../../components/lesson/LessonText.vue'
+import LessonSkeleton from '../../components/skeletons/LessonSkeleton.vue'
 
 const route = useRoute()
 const lessonId = route.params.id
@@ -99,9 +100,7 @@ onMounted(fetchLesson)
 
 <template>
     <div class="xl:px-32">
-        <div v-if="isLoading" class="flex justify-center h-screen items-center">
-            Carregando...
-        </div>
+        <LessonSkeleton v-if="isLoading" />
 
         <div v-else-if="lesson">
             <router-link to="/library" class="text-sm text-[#6B778F] hover:underline">
