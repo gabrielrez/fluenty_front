@@ -1,5 +1,6 @@
 import axios from "axios";
 import { handleApiErrors } from "./handleApiErrors";
+import router from "../router";
 
 export const api = axios.create({
     baseURL: 'http://localhost/api',
@@ -22,6 +23,11 @@ api.interceptors.request.use(function (config) {
 api.interceptors.response.use(
     response => response,
     error => {
+        if (error.response?.data?.error === 'subscription_required') {
+            router.push('/planos');
+            return Promise.reject(error);
+        }
+
         return Promise.reject(handleApiErrors(error));
     }
 );

@@ -64,9 +64,9 @@ async function handleLogout() {
                 Dicionário
             </SidebarLink>
 
-            <SidebarLink to="/progress" :icon="TrendingUp">
+            <!-- <SidebarLink to="/progress" :icon="TrendingUp">
                 Progresso
-            </SidebarLink>
+            </SidebarLink> -->
 
             <SidebarLink to="/profile" :icon="User">
                 Perfil

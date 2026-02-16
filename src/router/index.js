@@ -10,6 +10,7 @@ import Register from '../pages/auth/Register.vue'
 import DefaultLayout from '../layouts/DefaultLayout.vue'
 import Dictionary from '../pages/app/Dictionary.vue'
 import Lesson from '../pages/app/Lesson.vue'
+import Plans from '../pages/app/Plans.vue'
 
 const routes = [
     {
@@ -26,6 +27,14 @@ const routes = [
         path: '/register',
         name: 'Register',
         component: Register,
+    },
+    {
+        path: '/planos',
+        name: 'Plans',
+        component: Plans,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '/',
