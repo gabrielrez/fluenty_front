@@ -27,14 +27,12 @@ const activeTab = ref('anual');
 
         <!-- Tabs mobile -->
         <div class="mt-8 flex md:hidden mx-auto max-w-md bg-[#F1F3F7] rounded-xl p-1">
-            <button
-                @click="activeTab = 'anual'"
+            <button @click="activeTab = 'anual'"
                 :class="activeTab === 'anual' ? 'bg-white shadow text-[#1D56C9] font-bold' : 'text-[#6B778F]'"
                 class="flex-1 py-2.5 text-sm rounded-lg transition-all cursor-pointer">
                 Plano Anual
             </button>
-            <button
-                @click="activeTab = 'mensal'"
+            <button @click="activeTab = 'mensal'"
                 :class="activeTab === 'mensal' ? 'bg-white shadow text-[#1D56C9] font-bold' : 'text-[#6B778F]'"
                 class="flex-1 py-2.5 text-sm rounded-lg transition-all cursor-pointer">
                 Plano Mensal
@@ -42,7 +40,8 @@ const activeTab = ref('anual');
         </div>
 
         <div class="mt-8 md:mt-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 justify-center gap-6 md:gap-8">
-            <div :class="{ 'hidden md:flex': activeTab !== 'mensal' }" class="border border-[#E0E5EE] rounded-xl p-6 flex flex-col items-center shadow-lg order-2 md:order-1">
+            <div :class="{ 'hidden md:flex': activeTab !== 'mensal' }"
+                class="border border-[#E0E5EE] rounded-xl p-6 flex flex-col items-center shadow-lg order-2 md:order-1">
                 <div class="w-max rounded-xl bg-[#DDE6F6] p-3">
                     <Zap class="w-10 h-10 text-[#1D56C9]" />
                 </div>
@@ -58,7 +57,7 @@ const activeTab = ref('anual');
                 <ul class="mt-8 self-start flex flex-col gap-3 text-sm md:text-base">
                     <li class="flex items-center gap-1">
                         <Check class="w-5 h-5 text-[#39AC86]" />
-                        +500 Textos disponíveis
+                        +100 Materiais disponíveis
                     </li>
                     <li class="flex items-center gap-1">
                         <Check class="w-5 h-5 text-[#39AC86]" />
@@ -70,7 +69,7 @@ const activeTab = ref('anual');
                     </li>
                     <li class="flex items-center gap-1">
                         <Check class="w-5 h-5 text-[#39AC86]" />
-                        Muitas horas de áudio
+                        Áudios autênticos para praticas esculta
                     </li>
                     <li class="flex items-center gap-1">
                         <Check class="w-5 h-5 text-[#39AC86]" />
@@ -84,7 +83,13 @@ const activeTab = ref('anual');
                 </button>
             </div>
 
-            <div :class="{ 'hidden md:flex': activeTab !== 'anual' }" class="border border-[#1D56C9] rounded-xl p-6 flex flex-col items-center shadow-lg order-1 md:order-2">
+            <div :class="{ 'hidden md:flex': activeTab !== 'anual' }"
+                class="relative border border-[#1D56C9] rounded-xl p-6 flex flex-col items-center shadow-lg order-1 md:order-2">
+                <div
+                    class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#1D56C9] text-white text-xs font-semibold px-4 py-1 rounded-full shadow">
+                    Economia de 15%
+                </div>
+                
                 <div class="w-max rounded-xl bg-[#1D56C9] p-3">
                     <Crown class="w-10 h-10 text-white" />
                 </div>
@@ -102,7 +107,7 @@ const activeTab = ref('anual');
                 <ul class="mt-8 self-start flex flex-col gap-3 text-sm md:text-base">
                     <li class="flex items-center gap-1">
                         <Check class="w-5 h-5 text-[#39AC86]" />
-                        +500 Textos disponíveis
+                        +100 Materiais disponíveis
                     </li>
                     <li class="flex items-center gap-1">
                         <Check class="w-5 h-5 text-[#39AC86]" />
@@ -114,7 +119,7 @@ const activeTab = ref('anual');
                     </li>
                     <li class="flex items-center gap-1">
                         <Check class="w-5 h-5 text-[#39AC86]" />
-                        Muitas horas de áudio
+                        Áudios autênticos para praticas esculta
                     </li>
                     <li class="flex items-center gap-1">
                         <Check class="w-5 h-5 text-[#39AC86]" />
