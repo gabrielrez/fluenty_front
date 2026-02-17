@@ -1,6 +1,6 @@
 <script setup>
 import confetti from 'canvas-confetti'
-import { ArrowLeft, HeadphonesIcon, Languages, MousePointerClick } from 'lucide-vue-next'
+import { ArrowLeft, HeadphonesIcon } from 'lucide-vue-next'
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { api } from '../../lib/api'
