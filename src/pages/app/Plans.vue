@@ -2,8 +2,33 @@
 import { ref } from 'vue';
 import { ArrowLeft, Check, Crown, Zap } from 'lucide-vue-next';
 import Logo from '../../components/common/Logo.vue';
+import { api } from '../../lib/api';
 
 const activeTab = ref('anual');
+const loading = ref(false)
+
+const plans = {
+    mensal: 'price_1T0PfrCXfRxTkf71d1UcujwE',
+    anual: 'price_1T0PgSCXfRxTkf71TjtMxNRA'
+}
+
+const checkout = async (type) => {
+    try {
+        loading.value = true
+
+        const res = await api.post('/subscription/checkout', {
+            price_id: plans[type],
+            success_url: window.location.origin + '/success',
+            cancel_url: window.location.origin + '/planos'
+        })
+
+        window.location.href = res.data.checkout_url
+    } catch (err) {
+        alert(err.response?.data?.message || 'Erro ao iniciar checkout')
+    } finally {
+        loading.value = false
+    }
+}
 </script>
 
 <template>
@@ -25,7 +50,6 @@ const activeTab = ref('anual');
             Invista no seu inglês com um plano que cabe no seu bolso. Cancele quando quiser.
         </p>
 
-        <!-- Tabs mobile -->
         <div class="mt-8 flex md:hidden mx-auto max-w-md bg-[#F1F3F7] rounded-xl p-1">
             <button @click="activeTab = 'anual'"
                 :class="activeTab === 'anual' ? 'bg-white shadow text-[#1D56C9] font-bold' : 'text-[#6B778F]'"
@@ -77,9 +101,9 @@ const activeTab = ref('anual');
                     </li>
                 </ul>
 
-                <button
+                <button @click="checkout('mensal')" :disabled="loading"
                     class="mt-8 w-full border border-[#E0E5EE] rounded-xl font-bold text-sm p-3 cursor-pointer hover:bg-[#E0E5EE] transition-all">
-                    Assinar Mensal
+                    {{ loading ? 'Processando...' : 'Assinar Mensal' }}
                 </button>
             </div>
 
@@ -89,7 +113,7 @@ const activeTab = ref('anual');
                     class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#1D56C9] text-white text-xs font-semibold px-4 py-1 rounded-full shadow">
                     Economia de 15%
                 </div>
-                
+
                 <div class="w-max rounded-xl bg-[#1D56C9] p-3">
                     <Crown class="w-10 h-10 text-white" />
                 </div>
@@ -131,9 +155,9 @@ const activeTab = ref('anual');
                     </li>
                 </ul>
 
-                <button
+                <button @click="checkout('anual')" :disabled="loading"
                     class="mt-8 w-full rounded-xl font-bold text-sm p-3 cursor-pointer text-white bg-[#1D56C9] hover:bg-[#1047b5] transition-all">
-                    Assinar Anual
+                    {{ loading ? 'Processando...' : 'Assinar Anual' }}
                 </button>
             </div>
         </div>

@@ -52,6 +52,10 @@ const fetchLesson = async () => {
     isLoading.value = false
 }
 
+const startLesson = async () => {
+    await api.post(`/lessons/${lessonId}/start`)
+}
+
 const toggleCompleteLesson = async () => {
     isTogglingComplete.value = true
     const { data } = await api.post(`/lessons/${lessonId}/toggle-complete`)
@@ -95,7 +99,10 @@ const paragraphPairs = computed(() => {
     }))
 })
 
-onMounted(fetchLesson)
+onMounted(async () => {
+    await fetchLesson()
+    await startLesson()
+})
 </script>
 
 <template>
@@ -133,7 +140,8 @@ onMounted(fetchLesson)
 
             <TranslationToolbar :isTranslated="isTranslated" @toggle="isTranslated = !isTranslated" />
 
-            <LessonText :paragraphPairs="paragraphPairs" :isTranslated="isTranslated" :isWhitespace="isWhitespace" :lessonId="lessonId" />
+            <LessonText :paragraphPairs="paragraphPairs" :isTranslated="isTranslated" :isWhitespace="isWhitespace"
+                :lessonId="lessonId" />
 
             <button ref="completeButtonRef" @click="toggleCompleteLesson"
                 class="block mx-auto mt-12 px-6 py-3 rounded-xl text-white font-semibold cursor-pointer hover:scale-95 transition-all"

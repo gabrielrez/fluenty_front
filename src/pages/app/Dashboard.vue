@@ -153,10 +153,6 @@ const dashOffset = computed(() =>
         <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <LessonCardSkeleton v-if="isLoading" v-for="n in 2" :key="n" />
 
-            <div v-else-if="lessons.length === 0" class="col-span-full text-center text-gray-400 italic">
-                Você ainda não começou nenhuma Lesson.
-            </div>
-
             <LessonCard v-else v-for="lesson in lessons" :key="lesson.id" :lesson="lesson" />
 
             <router-link to="/library"
