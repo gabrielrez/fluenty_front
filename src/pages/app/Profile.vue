@@ -1,9 +1,10 @@
 <script setup>
-import { Calendar, LogOut, Mail, Settings } from 'lucide-vue-next';
+import { Calendar, CreditCard, LogOut, Mail, Settings } from 'lucide-vue-next';
 import { ref } from 'vue';
 import { useUserStore } from '../../stores/user';
 import { useRouter } from 'vue-router';
 import EditProfileModal from '../../components/common/EditProfileModal.vue';
+import { api } from '../../lib/api';
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -20,6 +21,12 @@ function formatDate(date) {
 async function handleLogout() {
     await userStore.logout();
     router.push('/login');
+}
+
+async function manageSubscription() {
+    const {data} = await api.post(`/subscription/billing-portal`)
+
+    window.location.href = data.billing_portal_url
 }
 </script>
 
@@ -58,11 +65,20 @@ async function handleLogout() {
             </div>
         </div>
 
-        <button @click="handleLogout"
-            class="flex justify-center items-center gap-2 mt-6 border border-[#E0E5EE] w-full p-3 rounded-xl cursor-pointer hover:bg-[#f2f4f7] transition-all">
-            <LogOut class="w-4 h-4 mt-0.5 text-[#DD3C3C]" />
-            <span class="text-[#DD3C3C] text-sm font-semibold">Sair da Conta</span>
-        </button>
+        <div class="grid grid-cols-2 gap-6">
+            <button @click="manageSubscription"
+                class="flex justify-center items-center gap-2 mt-6 border border-[#E0E5EE] w-full p-3 rounded-xl cursor-pointer hover:bg-[#f2f4f7] transition-all">
+                <CreditCard class="w-4 h-4 mt-0.5 text-[#243B6B]" />
+                <span class="text-[#243B6B] text-sm font-semibold">Gerenciar assinatura</span>
+            </button>
+
+            <button @click="handleLogout"
+                class="flex justify-center items-center gap-2 mt-6 border border-[#E0E5EE] w-full p-3 rounded-xl cursor-pointer hover:bg-[#f2f4f7] transition-all">
+                <LogOut class="w-4 h-4 mt-0.5 text-[#DD3C3C]" />
+                <span class="text-[#DD3C3C] text-sm font-semibold">Sair da Conta</span>
+            </button>
+        </div>
+
         <EditProfileModal v-model="showEditModal" />
     </div>
 </template>

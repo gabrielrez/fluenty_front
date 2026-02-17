@@ -47,6 +47,7 @@ const handleWordClick = (word) => {
 const fetchLesson = async () => {
     isLoading.value = true
     const { data } = await api.get(`/lessons/${lessonId}`)
+    console.log(data.data)
     lesson.value = data.data
     isCompleted.value = lesson.value.status === 'completed'
     isLoading.value = false
