@@ -21,7 +21,14 @@ const isTogglingComplete = ref(false)
 const lesson = ref(null)
 const isCompleted = ref(false)
 
-const formatDuration = (seconds) => Math.ceil(seconds / 60)
+const formatDuration = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+
+    const formattedSecs = String(secs).padStart(2, '0');
+
+    return `${mins} min e ${formattedSecs}s`;
+};
 
 const levelConfig = (level) => ({
     beginner: { label: 'Básico', bg: '#E2F3ED', color: '#39AC86' },
@@ -127,7 +134,7 @@ onMounted(async () => {
 
                 <div class="flex items-center gap-1 ml-3 text-[#6B778F] text-xs">
                     <HeadphonesIcon class="w-4 h-4" />
-                    {{ formatDuration(lesson.duration) }} min
+                    {{ formatDuration(lesson.duration) }}
                 </div>
             </div>
 

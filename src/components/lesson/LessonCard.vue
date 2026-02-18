@@ -8,7 +8,14 @@ defineProps({
     },
 });
 
-const formatDuration = (seconds) => Math.ceil(seconds / 60);
+const formatDuration = (seconds) => {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+
+  const formattedSecs = String(secs).padStart(2, '0');
+
+  return `${mins} min e ${formattedSecs}s`;
+};
 
 const levelConfig = (level) => {
     const map = {
@@ -92,7 +99,7 @@ const statusConfig = (status) => {
                 <div class="flex gap-1 items-center">
                     <HeadphonesIcon class="w-3.5 h-3.5 text-[#6B778F]" />
                     <span class="text-[#6B778F] text-xs">
-                        {{ formatDuration(lesson.duration) }} min
+                        {{ formatDuration(lesson.duration) }}
                     </span>
                 </div>
 
