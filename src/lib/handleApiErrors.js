@@ -12,7 +12,7 @@ export function handleApiErrors(error) {
     }
 
     if (data?.message) {
-        return [data.message];
+        return ['Credenciais inválidas.'];
     }
 
     return ['Erro inesperado. Tente novamente.'];

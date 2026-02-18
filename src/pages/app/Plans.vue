@@ -18,8 +18,8 @@ const checkout = async (type) => {
 
         const res = await api.post('/subscription/checkout', {
             price_id: plans[type],
-            success_url: window.location.origin + '/success',
-            cancel_url: window.location.origin + '/planos'
+            success_url: 'http://127.0.0.1:5173/dashboard?subscribed=true',
+            cancel_url: 'http://127.0.0.1:5173/planos'
         })
 
         window.location.href = res.data.checkout_url

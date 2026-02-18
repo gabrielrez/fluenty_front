@@ -6,11 +6,16 @@ import LessonCardSkeleton from '../../components/skeletons/LessonCardSkeleton.vu
 import StatisticsSkeleton from '../../components/skeletons/StatisticsSkeleton.vue';
 import { api } from '../../lib/api';
 import { BookmarkCheck, BookOpenCheck, Clock, Flame } from 'lucide-vue-next';
+import { useRoute } from 'vue-router';
 
 const userStore = useUserStore();
 
+const route = useRoute()
+
 const lessons = ref([])
 const isLoading = ref(false)
+
+const showCongratsModal = ref(false)
 
 const statistics = ref({
     percent_progress: 0,
@@ -45,6 +50,13 @@ onMounted(async () => {
 
     lessons.value = lessonsRes.data.data;
     statistics.value = statsRes.data.data;
+
+    if (route.query.subscribed === 'true') {
+        showCongratsModal.value = true
+
+        window.history.replaceState({}, document.title, window.location.pathname)
+    }
+
     isLoading.value = false;
 });
 
@@ -82,69 +94,69 @@ const dashOffset = computed(() =>
         <StatisticsSkeleton v-if="isLoading" />
 
         <template v-else>
-        <div class="border border-[#e0e5eea3] rounded-xl flex flex-col justify-center items-center p-6 sm:p-9">
-            <div class="flex items-center justify-center" :style="{ width: size + 'px', height: size + 'px' }">
-                <svg :width="size" :height="size" class="-rotate-90">
-                    <circle :cx="size / 2" :cy="size / 2" :r="radius" :stroke-width="stroke"
-                        class="stroke-[#E8EAEE] fill-none" />
+            <div class="border border-[#e0e5eea3] rounded-xl flex flex-col justify-center items-center p-6 sm:p-9">
+                <div class="flex items-center justify-center" :style="{ width: size + 'px', height: size + 'px' }">
+                    <svg :width="size" :height="size" class="-rotate-90">
+                        <circle :cx="size / 2" :cy="size / 2" :r="radius" :stroke-width="stroke"
+                            class="stroke-[#E8EAEE] fill-none" />
 
-                    <circle :cx="size / 2" :cy="size / 2" :r="radius" :stroke-width="stroke"
-                        class="stroke-[#1D56C9] fill-none transition-all duration-500" stroke-linecap="round"
-                        :stroke-dasharray="circumference" :stroke-dashoffset="dashOffset" />
-                </svg>
+                        <circle :cx="size / 2" :cy="size / 2" :r="radius" :stroke-width="stroke"
+                            class="stroke-[#1D56C9] fill-none transition-all duration-500" stroke-linecap="round"
+                            :stroke-dasharray="circumference" :stroke-dashoffset="dashOffset" />
+                    </svg>
 
-                <div class="absolute text-2xl font-bold text-gray-800">
-                    {{ Math.round(statistics.percent_progress) }}%
+                    <div class="absolute text-2xl font-bold text-gray-800">
+                        {{ Math.round(statistics.percent_progress) }}%
+                    </div>
                 </div>
+                <h4 class="mt-4 text-[#667799]">Progresso Geral</h4>
             </div>
-            <h4 class="mt-4 text-[#667799]">Progresso Geral</h4>
-        </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
-            <div class="border border-[#e0e5eea3] rounded-xl px-5 py-3 flex justify-between">
-                <div>
-                    <span class="text-[#667799] text-sm font-medium">Lições concluídas</span>
-                    <h4 class="mt-2.5 font-semibold text-2xl">{{ statistics.completed_lessons }}</h4>
-                    <span class="text-xs text-[#667799]">artigos completos</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+                <div class="border border-[#e0e5eea3] rounded-xl px-5 py-3 flex justify-between">
+                    <div>
+                        <span class="text-[#667799] text-sm font-medium">Lições concluídas</span>
+                        <h4 class="mt-2.5 font-semibold text-2xl">{{ statistics.completed_lessons }}</h4>
+                        <span class="text-xs text-[#667799]">artigos completos</span>
+                    </div>
+                    <div class="bg-[#E8EEF9] rounded-xl w-max h-max p-2">
+                        <BookOpenCheck class="text-2xl text-[#1D56C9]" />
+                    </div>
                 </div>
-                <div class="bg-[#E8EEF9] rounded-xl w-max h-max p-2">
-                    <BookOpenCheck class="text-2xl text-[#1D56C9]" />
+                <div class="border border-[#e0e5eea3] rounded-xl px-5 py-3 flex justify-between">
+                    <div>
+                        <span class="text-[#667799] text-sm font-medium">Tempo de estudo</span>
+                        <h4 class="mt-2.5 font-semibold text-2xl">{{ formattedStudyTime }}</h4>
+                        <span class="text-xs text-[#667799]">de textos e áudios concluídos</span>
+                    </div>
+                    <div class="bg-[#E8EEF9] rounded-xl w-max h-max p-2">
+                        <Clock class="text-2xl text-[#1D56C9]" />
+                    </div>
                 </div>
             </div>
-            <div class="border border-[#e0e5eea3] rounded-xl px-5 py-3 flex justify-between">
-                <div>
-                    <span class="text-[#667799] text-sm font-medium">Tempo de estudo</span>
-                    <h4 class="mt-2.5 font-semibold text-2xl">{{ formattedStudyTime }}</h4>
-                    <span class="text-xs text-[#667799]">de textos e áudios concluídos</span>
-                </div>
-                <div class="bg-[#E8EEF9] rounded-xl w-max h-max p-2">
-                    <Clock class="text-2xl text-[#1D56C9]" />
-                </div>
-            </div>
-        </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
-            <div class="border border-[#e0e5eea3] rounded-xl px-5 py-3 flex justify-between">
-                <div>
-                    <span class="text-[#667799] text-sm font-medium">Palavras salvas</span>
-                    <h4 class="mt-2.5 font-semibold text-2xl">{{ statistics.words_saved }}</h4>
-                    <span class="text-xs text-[#667799]">palavras no dicionário</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+                <div class="border border-[#e0e5eea3] rounded-xl px-5 py-3 flex justify-between">
+                    <div>
+                        <span class="text-[#667799] text-sm font-medium">Palavras salvas</span>
+                        <h4 class="mt-2.5 font-semibold text-2xl">{{ statistics.words_saved }}</h4>
+                        <span class="text-xs text-[#667799]">palavras no dicionário</span>
+                    </div>
+                    <div class="bg-[#E8EEF9] rounded-xl w-max h-max p-2">
+                        <BookmarkCheck class="text-2xl text-[#1D56C9]" />
+                    </div>
                 </div>
-                <div class="bg-[#E8EEF9] rounded-xl w-max h-max p-2">
-                    <BookmarkCheck class="text-2xl text-[#1D56C9]" />
+                <div class="border border-[#eee0e0a0] bg-[#FBEAEA] rounded-xl px-5 py-3 flex justify-between">
+                    <div>
+                        <span class="text-[#996666] text-sm font-medium">Sequência atual</span>
+                        <h4 class="mt-2.5 font-semibold text-[#321B1B] text-2xl">{{ statistics.sequence }}</h4>
+                        <span class="text-xs text-[#996666]">dias de estudo seguidos</span>
+                    </div>
+                    <div class="bg-[#DD3C3C] rounded-xl w-max h-max p-2">
+                        <Flame class="text-2xl text-[#FBEAEA]" />
+                    </div>
                 </div>
             </div>
-            <div class="border border-[#eee0e0a0] bg-[#FBEAEA] rounded-xl px-5 py-3 flex justify-between">
-                <div>
-                    <span class="text-[#996666] text-sm font-medium">Sequência atual</span>
-                    <h4 class="mt-2.5 font-semibold text-[#321B1B] text-2xl">{{ statistics.sequence }}</h4>
-                    <span class="text-xs text-[#996666]">dias de estudo seguidos</span>
-                </div>
-                <div class="bg-[#DD3C3C] rounded-xl w-max h-max p-2">
-                    <Flame class="text-2xl text-[#FBEAEA]" />
-                </div>
-            </div>
-        </div>
         </template>
     </section>
 
@@ -161,4 +173,17 @@ const dashOffset = computed(() =>
             </router-link>
         </div>
     </section>
+
+    <div v-if="showCongratsModal" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 text-center max-w-sm w-full">
+            <h2 class="text-2xl font-bold">🎉 Parabéns!</h2>
+            <p class="mt-3 text-[#667799]">
+                Sua assinatura foi ativada com sucesso.
+            </p>
+
+            <button @click="showCongratsModal=false" class="mt-6 bg-[#1D56C9] text-white px-6 py-3 rounded-xl font-semibold cursor-pointer = hover:bg-[#0b43b2] transition-all">
+                Começar a estudar
+            </button>
+        </div>
+    </div>
 </template>
