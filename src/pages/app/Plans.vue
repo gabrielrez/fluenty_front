@@ -170,4 +170,15 @@ const checkout = async (type) => {
             © 2026 Fluenty. Aprenda inglês com leitura e escuta.
         </span>
     </footer>
+
+    <div v-if="loading" class="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+
+        <div class="bg-white rounded-2xl px-8 py-6 shadow-xl flex flex-col items-center gap-4">
+            <div class="w-10 h-10 border-4 border-[#1D56C9] border-t-transparent rounded-full animate-spin"></div>
+            <p class="font-semibold text-[#1D56C9]">
+                Carregando checkout...
+            </p>
+        </div>
+
+    </div>
 </template>

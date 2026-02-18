@@ -24,7 +24,9 @@ async function handleLogout() {
 }
 
 async function manageSubscription() {
-    const {data} = await api.post(`/subscription/billing-portal`)
+    const {data} = await api.post(`/subscription/billing-portal`, {
+        return_url: 'http://127.0.0.1:5173/profile'
+    })
 
     window.location.href = data.billing_portal_url
 }
