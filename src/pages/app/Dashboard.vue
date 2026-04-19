@@ -42,7 +42,7 @@ onMounted(async () => {
             params: {
                 only_started: true,
                 latest: true,
-                per_page: 2,
+                per_page: 3,
             }
         }),
         api.get('/statistics'),
@@ -164,12 +164,12 @@ const dashOffset = computed(() =>
         <h3 class="text-xl font-semibold">Continue Aprendendo</h3>
         <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <LessonCardSkeleton v-if="isLoading" v-for="n in 2" :key="n" />
-
             <LessonCard v-else v-for="lesson in lessons" :key="lesson.id" :lesson="lesson" />
 
             <router-link to="/library"
-                class="min-h-89 flex justify-center items-center text-[#6B778F] border border-[#E0E5EE] rounded-xl overflow-hidden cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-lg">
-                Ver todos
+                class="col-span-full flex items-center justify-center gap-2 py-3.5 text-sm font-medium text-[#6B778F] bg-[#F5F7FA] border border-[#E0E5EE] rounded-xl cursor-pointer transition-all hover:text-[#334155] hover:bg-[#ECEEF2]">
+                Ver biblioteca completa
+                <ArrowRight class="w-4 h-4" />
             </router-link>
         </div>
     </section>
@@ -181,7 +181,8 @@ const dashOffset = computed(() =>
                 Sua assinatura foi ativada com sucesso.
             </p>
 
-            <button @click="showCongratsModal=false" class="mt-6 bg-[#1D56C9] text-white px-6 py-3 rounded-xl font-semibold cursor-pointer = hover:bg-[#0b43b2] transition-all">
+            <button @click="showCongratsModal = false"
+                class="mt-6 bg-[#1D56C9] text-white px-6 py-3 rounded-xl font-semibold cursor-pointer = hover:bg-[#0b43b2] transition-all">
                 Começar a estudar
             </button>
         </div>
