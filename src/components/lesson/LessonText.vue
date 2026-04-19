@@ -51,7 +51,7 @@ const wordClick = (word, pIndex, wIndex) => {
                 </span>
             </p>
 
-            <p v-if="isTranslated && pair.translation" class="text-base italic text-[#6B778F]">
+            <p v-if="isTranslated && pair.translation" class="text-base  text-[#6B778F]">
                 {{ pair.translation }}
             </p>
         </div>

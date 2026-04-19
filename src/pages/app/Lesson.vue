@@ -27,6 +27,10 @@ const formatDuration = (seconds) => {
 
     const formattedSecs = String(secs).padStart(2, '0');
 
+    if (mins === 0) {
+        return `${secs}s`;
+    }
+
     return `${mins} min e ${formattedSecs}s`;
 };
 
@@ -129,7 +133,7 @@ onMounted(async () => {
                 </span>
 
                 <span class="text-xs bg-[#E8EAEE] text-[#667799] px-2.5 py-1 rounded-full">
-                    {{ lesson.category.name }}
+                    {{ lesson.source }}
                 </span>
 
                 <div class="flex items-center gap-1 ml-3 text-[#6B778F] text-xs">

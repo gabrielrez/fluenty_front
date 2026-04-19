@@ -9,12 +9,16 @@ defineProps({
 });
 
 const formatDuration = (seconds) => {
-  const mins = Math.floor(seconds / 60);
-  const secs = seconds % 60;
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
 
-  const formattedSecs = String(secs).padStart(2, '0');
+    const formattedSecs = String(secs).padStart(2, '0');
 
-  return `${mins} min e ${formattedSecs}s`;
+    if (mins === 0) {
+        return `${secs}s`;
+    }
+
+    return `${mins} min e ${formattedSecs}s`;
 };
 
 const levelConfig = (level) => {
@@ -81,7 +85,7 @@ const statusConfig = (status) => {
                 </span>
 
                 <span class="text-xs text-[#667799] px-2.5 py-1 bg-[#E8EAEE] rounded-full capitalize">
-                    {{ lesson.category.name }}
+                    {{ lesson.source }}
                 </span>
             </div>
 
