@@ -168,14 +168,14 @@ watch(
             class="pl-4 text-sm border border-[#E0E5EE] h-10 rounded-xl w-full" />
 
         <button @click="showFilters = !showFilters"
-            class="h-10 px-4 rounded-xl text-sm font-medium flex items-center justify-center gap-2 border cursor-pointer transition-all w-full sm:w-auto"
-            :class="hasActiveFilters
-                ? 'bg-[#1D4ED8] text-white border-[#1D4ED8]'
+            class="h-10 px-4 rounded-xl text-sm font-medium flex items-center justify-center gap-2 border cursor-pointer transition-all whitespace-nowrap w-full sm:w-auto shrink-0"
+            :class="showFilters || hasActiveFilters
+                ? 'bg-blue-50 text-blue-700 border-blue-600'
                 : 'border-[#E0E5EE] text-[#334155] hover:bg-[#F5F7FA]'">
-            <Filter class="w-4 h-4" />
+            <Filter class="w-4 h-4 shrink-0" />
             Filtros
             <span v-if="hasActiveFilters"
-                class="ml-1 bg-white text-[#1D4ED8] text-xs font-semibold w-5 h-5 rounded-full flex items-center justify-center">
+                class="bg-blue-600 text-white text-xs font-semibold w-5 h-5 rounded-full flex items-center justify-center shrink-0">
                 {{ activeFiltersCount }}
             </span>
         </button>
