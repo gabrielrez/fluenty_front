@@ -1,5 +1,5 @@
 <script setup>
-import { HeadphonesIcon } from 'lucide-vue-next';
+import { BadgeCheck, HeadphonesIcon } from 'lucide-vue-next';
 
 defineProps({
     lesson: {
@@ -73,7 +73,16 @@ const statusConfig = (status) => {
 <template>
     <router-link :to="`/lesson/${lesson.id}`"
         class="border border-[#E0E5EE] rounded-xl overflow-hidden cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-lg">
-        <img class="w-full h-40 object-cover" :src="lesson.image_url" :alt="lesson.title" />
+
+        <div class="relative">
+            <img class="w-full h-40 object-cover" :src="lesson.image_url" :alt="lesson.title" />
+
+            <span v-if="!lesson.is_free"
+                class="absolute top-3 left-3 bg-[#1D56C9] text-white text-xs font-semibold px-3 py-1 rounded-full shadow-xl flex items-center gap-1">
+                <BadgeCheck class="w-4 h-4" />
+                Premium
+            </span>
+        </div>
 
         <div class="p-5">
             <div class="flex gap-2 items-center">

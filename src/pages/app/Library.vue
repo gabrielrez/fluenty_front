@@ -43,6 +43,7 @@ const filters = reactive({
     category: '',
     status: '',
     notStarted: false,
+    isFree: null,
 });
 
 const hasActiveFilters = computed(() => {
@@ -50,7 +51,8 @@ const hasActiveFilters = computed(() => {
         !!filters.level ||
         !!filters.category ||
         !!filters.status ||
-        filters.notStarted
+        filters.notStarted ||
+        filters.isFree !== null
     );
 });
 
@@ -60,6 +62,7 @@ const activeFiltersCount = computed(() => {
     if (filters.category) count++
     if (filters.status) count++
     if (filters.notStarted) count++
+    if (filters.isFree !== null) count++
     return count
 });
 
@@ -68,6 +71,7 @@ const clearFilters = () => {
     filters.category = ''
     filters.status = ''
     filters.notStarted = false
+    filters.isFree = null
 }
 
 const levels = [
@@ -86,6 +90,7 @@ const fetchLessons = async (page = pagination.currentPage) => {
             category: filters.category || undefined,
             status: filters.notStarted ? undefined : filters.status || undefined,
             not_started: filters.notStarted ? true : undefined,
+            is_free: filters.isFree !== null ? filters.isFree : undefined,
         },
     })
     lessons.value = data.data
@@ -120,6 +125,10 @@ const toggleNotStarted = () => {
     filters.notStarted = !filters.notStarted
 }
 
+const toggleIsFree = (value) => {
+    filters.isFree = filters.isFree === value ? null : value
+}
+
 onMounted(async () => {
     await Promise.all([fetchLessons(), fetchCategories()])
 })
@@ -138,7 +147,7 @@ watch(
 )
 
 watch(
-    () => [filters.level, filters.category, filters.status, filters.notStarted],
+    () => [filters.level, filters.category, filters.status, filters.notStarted, filters.isFree],
     () => {
         pagination.currentPage = 1
         fetchLessons(1)
@@ -226,6 +235,25 @@ watch(
         </div>
 
         <div>
+            <p class="text-sm font-semibold mb-3">Acesso</p>
+            <div class="flex flex-col sm:flex-row flex-wrap gap-2">
+                <button @click="toggleIsFree(true)"
+                    class="px-4 py-2 rounded-lg text-sm border transition cursor-pointer w-full sm:w-auto" :class="filters.isFree === true
+                        ? 'bg-[#E2F3ED] text-[#39AC86] border-[#39AC86]'
+                        : 'border-[#E0E5EE] text-[#334155] hover:bg-[#F5F7FA]'">
+                    Gratuito
+                </button>
+
+                <button @click="toggleIsFree(false)"
+                    class="px-4 py-2 rounded-lg text-sm border transition cursor-pointer w-full sm:w-auto" :class="filters.isFree === false
+                        ? 'bg-[#FAE2E2] text-[#DD3C3C] border-[#DD3C3C]'
+                        : 'border-[#E0E5EE] text-[#334155] hover:bg-[#F5F7FA]'">
+                    Premium
+                </button>
+            </div>
+        </div>
+
+        <!-- <div>
             <p class="text-sm font-semibold mb-3">Topic</p>
             <div class="flex flex-col sm:flex-row flex-wrap gap-2">
                 <button v-for="category in categories" :key="category.id" @click="toggleCategory(category.id)"
@@ -236,7 +264,7 @@ watch(
                     {{ category.name }}
                 </button>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <div class="flex items-center justify-between mb-4">
