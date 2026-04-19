@@ -72,13 +72,13 @@ const statusConfig = (status) => {
 
 <template>
     <router-link :to="`/lesson/${lesson.id}`"
-        class="border border-[#E0E5EE] rounded-xl overflow-hidden cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-lg">
+        class="group border border-[#E0E5EE] rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
 
         <div class="relative">
-            <img class="w-full h-40 object-cover" :src="lesson.image_url" :alt="lesson.title" />
+            <img class="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105" :src="lesson.image_url" :alt="lesson.title" />
 
-            <span v-if="!lesson.is_free"
-                class="absolute top-3 left-3 bg-[#1D56C9] text-white text-xs font-semibold px-3 py-1 rounded-full shadow-xl flex items-center gap-1">
+            <span v-if="!lesson.is_free" class="absolute top-3 left-3 bg-white/90 backdrop-blur text-[#1D56C9]
+                   text-xs font-semibold px-3 py-1 rounded-full shadow flex items-center gap-1">
                 <BadgeCheck class="w-4 h-4" />
                 Premium
             </span>
