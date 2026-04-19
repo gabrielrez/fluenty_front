@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { Download } from 'lucide-vue-next'
 
 const props = defineProps({
     lesson: {
@@ -15,6 +16,7 @@ const currentTime = ref(0)
 const duration = ref(0)
 const progress = ref(0)
 const volume = ref(1)
+const isDownloading = ref(false)
 
 const audioSrc = computed(() => props.lesson.audio_url)
 const totalDuration = computed(() => props.lesson.duration)
@@ -64,6 +66,26 @@ const formatTime = (seconds) => {
     return `${m}:${String(s).padStart(2, '0')}`
 }
 
+const downloadAudio = async () => {
+    if (isDownloading.value) return
+    isDownloading.value = true
+
+    try {
+        const response = await fetch(audioSrc.value)
+        const blob = await response.blob()
+        const url = URL.createObjectURL(blob)
+
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `${props.lesson.title}.mp3`
+        a.click()
+
+        URL.revokeObjectURL(url)
+    } finally {
+        isDownloading.value = false
+    }
+}
+
 const progressStyle = computed(() => ({
     background: `linear-gradient(to right, #1D56C9 ${progress.value}%, #E5E7EB ${progress.value}%)`,
 }))
@@ -110,8 +132,24 @@ watch(
         <input type="range" min="0" max="1" step="0.01" v-model="volume" @input="changeVolume"
             class="audio-range w-24 hidden sm:block" :style="volumeStyle" />
 
+        <button @click="downloadAudio"
+            class="shrink-0 flex items-center justify-center w-9 h-9 rounded-full border border-[#E0E5EE] text-[#6B778F] hover:text-[#1D56C9] hover:border-[#1D56C9] transition-all cursor-pointer hidden sm:flex"
+            :class="isDownloading ? 'opacity-50 cursor-not-allowed' : ''" :disabled="isDownloading"
+            :title="isDownloading ? 'Baixando...' : 'Baixar áudio'">
+            <Download class="w-4 h-4" />
+        </button>
+
         <audio ref="audioRef" :src="audioSrc" preload="metadata" @loadedmetadata="onLoadedMetadata"
             @timeupdate="onTimeUpdate" @ended="onEnded" />
+    </div>
+    <div @click="downloadAudio" class="mt-6 flex items-center justify-center gap-3
+             bg-[#1D56C9] text-white
+             px-4 py-2 rounded-xl
+             cursor-pointer
+             hover:scale-95 transition
+             w-full sm:hidden">
+        <Download class="w-4 h-4" />
+        Download
     </div>
 </template>
 
