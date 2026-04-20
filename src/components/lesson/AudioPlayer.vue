@@ -133,7 +133,7 @@ watch(
             class="audio-range w-24 hidden sm:block" :style="volumeStyle" />
 
         <button @click="downloadAudio"
-            class="shrink-0 flex items-center justify-center w-9 h-9 rounded-full border border-[#E0E5EE] text-[#6B778F] hover:text-[#1D56C9] hover:border-[#1D56C9] transition-all cursor-pointer hidden sm:flex"
+            class="shrink-0 items-center justify-center w-9 h-9 rounded-full border border-[#E0E5EE] text-[#6B778F] hover:text-[#1D56C9] hover:border-[#1D56C9] transition-all cursor-pointer hidden sm:flex"
             :class="isDownloading ? 'opacity-50 cursor-not-allowed' : ''" :disabled="isDownloading"
             :title="isDownloading ? 'Baixando...' : 'Baixar áudio'">
             <Download class="w-4 h-4" />
