@@ -117,7 +117,7 @@ watch(
         </button>
 
         <div class="flex items-center gap-3 w-full">
-            <span class="text-xs text-[#6B778F] w-10 text-center">
+            <span class="text-xs text-[#6B778F] w-10 text- center">
                 {{ formatTime(currentTime) }}
             </span>
 
