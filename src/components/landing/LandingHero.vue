@@ -11,14 +11,21 @@
                 <span class="bg-[#F5DDDE] text-[#DD3C3C] text-xs font-semibold px-2.5 py-1 rounded-full">Avançado</span>
             </div>
             <div class="mt-6">
-                <h1 class="text-5xl font-bold text-center lg:text-left">Domine inglês através da
+                <!-- <h1 class="text-5xl font-bold text-center lg:text-left">Domine inglês através da
                     <br />
                     <span class="text-[#1D56C9]">leitura</span>
                     e
                     <span class="text-[#DD3C3C]">escuta</span>
+                </h1> -->
+                <h1 class="text-5xl font-bold text-center lg:text-left">Aprenda <span
+                        class="text-[#DD3C3C]">inglês</span> com<span class="text-[#1D56C9]"> histórias</span>
                 </h1>
-                <p class="text-lg text-[#6B778F] mt-6 text-center lg:text-left">
+                <!-- <p class="text-lg text-[#6B778F] mt-6 text-center lg:text-left">
                     Textos autênticos, áudios nativos e progresso visível. Aprenda no seu ritmo com um método
+                    comprovado.
+                </p> -->
+                <p class="text-lg text-[#6B778F] mt-6 text-center lg:text-left">
+                    Aprenda com textos e áudios nativos. Estude no seu ritmo com um método
                     comprovado.
                 </p>
             </div>
