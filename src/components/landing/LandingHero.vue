@@ -25,7 +25,7 @@
                     comprovado.
                 </p> -->
                 <p class="text-lg text-[#6B778F] mt-6 text-center lg:text-left">
-                    Aprenda com textos e áudios nativos. Estude no seu ritmo com um método
+                    Aprenda com textos e áudios. Estude no seu ritmo com um método
                     comprovado.
                 </p>
             </div>
