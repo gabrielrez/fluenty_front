@@ -1,7 +1,7 @@
 <template>
     <LandingHeader />
     <LandingHero />
-    <LandingStats />
+    <!-- <LandingStats /> -->
     <LandingHowItWorks />
     
     <LandingCTASection 
