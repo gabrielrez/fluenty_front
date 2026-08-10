@@ -11,7 +11,7 @@
             <h2 class="text-3xl font-extrabold text-center" :class="{ 'mt-4': !showUsersIcon }">{{ title }}</h2>
             <p v-if="description" class="text-[#6B778F] mt-6 text-center max-w-2xl">{{ description }}</p>
             <router-link to="/dashboard" :class="[
-                'mx-auto lg:mx-0 mt-6 w-max flex items-center gap-2 px-8 py-3 rounded-xl font-medium hover:scale-[98%] transition-all',
+                'mx-auto lg:mx-0 mt-6 w-max flex items-center gap-2 px-8 py-3 rounded-lg font-medium hover:scale-[98%] transition-all',
                 variant === 'primary' ? 'bg-white text-[#1B2232]' : 'bg-[#1D56C9] text-white'
             ]">
                 {{ buttonText }}

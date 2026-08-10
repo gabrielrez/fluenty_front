@@ -146,7 +146,7 @@ onMounted(async () => {
                 {{ lesson.title }}
             </h1>
 
-            <img class="mt-8 w-full h-40 sm:h-80 rounded-xl object-cover" :src="lesson.image_url" />
+            <img class="mt-8 w-full h-40 sm:h-80 rounded-lg object-cover" :src="lesson.image_url" />
 
             <AudioPlayer :lesson="lesson" />
 
@@ -156,7 +156,7 @@ onMounted(async () => {
                 :lessonId="lessonId" />
 
             <button ref="completeButtonRef" @click="toggleCompleteLesson"
-                class="block mx-auto mt-12 px-6 py-3 rounded-xl text-white font-semibold cursor-pointer hover:scale-95 transition-all"
+                class="block mx-auto mt-12 px-6 py-3 rounded-lg text-white font-semibold cursor-pointer hover:scale-95 transition-all"
                 :class="isCompleted
                     ? 'bg-[#39AC86]'
                     : 'bg-[#1D56C9]'">

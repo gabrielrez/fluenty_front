@@ -48,57 +48,57 @@ async function handleRegister() {
     </header>
 
     <main class="p-5 w-full max-w-7xl mx-auto mt-10 pt-16">
-        <div class="max-w-md border border-[#E0E5EE] shadow-md rounded-xl mx-auto p-6">
+        <div class="max-w-md border border-[#E0E5EE] shadow-md rounded-lg mx-auto p-6">
             <h1 class="text-center text-2xl font-bold">Criar Conta</h1>
             <p class="text-sm text-[#6B778F] mt-2 text-center">Crie sua conta para continuar aprendendo</p>
 
-            <div class="bg-[#E8EAEE] w-full p-1 mt-8 rounded-xl grid grid-cols-2 gap-1">
+            <div class="bg-[#E8EAEE] w-full p-1 mt-8 rounded-lg grid grid-cols-2 gap-1">
                 <router-link to="/login"
-                    class="px-4 py-2 rounded-xl cursor-pointer text-center text-sm text-[#667799] font-semibold">Entrar</router-link>
+                    class="px-4 py-2 rounded-lg cursor-pointer text-center text-sm text-[#667799] font-semibold">Entrar</router-link>
                 <router-link to="/register"
-                    class="bg-white px-4 py-2 rounded-xl cursor-pointer text-center text-sm font-semibold">Criar
+                    class="bg-white px-4 py-2 rounded-lg cursor-pointer text-center text-sm font-semibold">Criar
                     conta</router-link>
             </div>
 
             <form @submit.prevent="handleRegister" class="mt-8">
                 <div>
                     <label for="name" class="text-sm font-medium">Nome</label>
-                    <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-xl pl-2.5">
+                    <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-lg pl-2.5">
                         <User class="w-5 h-5 text-[#667799]" />
                         <input v-model="form.name" type="text" name="name" id="name" placeholder="Seu nome"
-                            class="w-full p-2.5 text-sm text-[#1b2232] rounded-xl">
+                            class="w-full p-2.5 text-sm text-[#1b2232] rounded-lg">
                     </div>
                 </div>
                 <div class="mt-4">
                     <label for="email" class="text-sm font-medium">Email</label>
-                    <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-xl pl-2.5">
+                    <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-lg pl-2.5">
                         <Mail class="w-5 h-5 text-[#667799]" />
                         <input v-model="form.email" type="text" name="email" id="email" placeholder="seu@email.com"
-                            class="w-full p-2.5 text-sm text-[#1b2232] rounded-xl">
+                            class="w-full p-2.5 text-sm text-[#1b2232] rounded-lg">
                     </div>
                 </div>
                 <div class="mt-4">
                     <label for="password" class="text-sm font-medium">Senha</label>
-                    <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-xl pl-2.5">
+                    <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-lg pl-2.5">
                         <Lock class="w-5 h-5 text-[#667799]" />
                         <input v-model="form.password" type="password" name="password" id="password"
-                            placeholder="Mínimo 6 caracteres" class="w-full p-2.5 text-sm text-[#1b2232] rounded-xl">
+                            placeholder="Mínimo 6 caracteres" class="w-full p-2.5 text-sm text-[#1b2232] rounded-lg">
                     </div>
                 </div>
                 <div class="mt-4">
                     <label for="password_confirmation" class="text-sm font-medium">Confirmar Senha</label>
-                    <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-xl pl-2.5">
+                    <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-lg pl-2.5">
                         <Lock class="w-5 h-5 text-[#667799]" />
                         <input v-model="form.password_confirmation" type="password" name="password_confirmation"
                             id="password_confirmation" placeholder="Digite a senha novamente"
-                            class="w-full p-2.5 text-sm text-[#1b2232] rounded-xl">
+                            class="w-full p-2.5 text-sm text-[#1b2232] rounded-lg">
                     </div>
                 </div>
 
                 <FormError :errors="errors" />
 
                 <button
-                    class="mt-6 w-full text-white bg-[#1D56C9] font-bold rounded-xl px-8 py-3 text-sm cursor-pointer hover:bg-[#3367CE] transition-all">
+                    class="mt-6 w-full text-white bg-[#1D56C9] font-bold rounded-lg px-8 py-3 text-sm cursor-pointer hover:bg-[#3367CE] transition-all">
                     Criar conta
                 </button>
             </form>

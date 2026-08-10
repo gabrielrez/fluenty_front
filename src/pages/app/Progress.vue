@@ -8,9 +8,9 @@
         </p>
     </div>
     <div>
-        <div class="block mt-6 bg-gray-200 w-full h-60 rounded-xl">
+        <div class="block mt-6 bg-gray-200 w-full h-60 rounded-lg">
         </div>
-        <div class="block mt-8 bg-gray-200 w-full h-42 rounded-xl">
+        <div class="block mt-8 bg-gray-200 w-full h-42 rounded-lg">
         </div>
     </div>
 </template>

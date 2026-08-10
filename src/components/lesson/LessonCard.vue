@@ -72,7 +72,7 @@ const statusConfig = (status) => {
 
 <template>
     <router-link :to="`/lesson/${lesson.id}`"
-        class="group border border-[#E0E5EE] rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
+        class="group border border-[#E0E5EE] rounded-lg overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
 
         <div class="relative">
             <img class="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105"

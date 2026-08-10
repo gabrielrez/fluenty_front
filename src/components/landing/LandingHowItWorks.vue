@@ -6,7 +6,7 @@
     
             <div class="mt-8 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 md:gap-6 gap-3">
                 <div v-for="(step, index) in steps" :key="index"
-                    class="bg-white border border-[#E0E5EE] rounded-xl p-6 shadow-md hover:border-[#D2DDF4] hover:shadow-xl transition-all">
+                    class="bg-white border border-[#E0E5EE] rounded-lg p-6 hover:border-[#D2DDF4] hover:shadow-lg transition-all">
                     <span class="text-4xl font-semibold text-[#D2DDF4]">{{ String(index + 1).padStart(2, '0') }}</span>
                     <h3 class="mt-4 text-lg font-semibold">{{ step.title }}</h3>
                     <p class="mt-2 text-sm text-[#6B778F]">{{ step.description }}</p>

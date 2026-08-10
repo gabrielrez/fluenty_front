@@ -46,33 +46,33 @@ async function handleLogin() {
     </header>
 
     <main class="p-5 w-full max-w-7xl mx-auto mt-10 pt-16">
-        <div class="max-w-md border border-[#E0E5EE] shadow-md rounded-xl mx-auto p-6">
+        <div class="max-w-md border border-[#E0E5EE] shadow-md rounded-lg mx-auto p-6">
             <h1 class="text-center text-2xl font-bold">Fazer login</h1>
             <p class="text-sm text-[#6B778F] mt-2 text-center">Entre na sua conta para continuar aprendendo</p>
 
-            <div class="bg-[#E8EAEE] w-full p-1 mt-8 rounded-xl grid grid-cols-2 gap-1">
+            <div class="bg-[#E8EAEE] w-full p-1 mt-8 rounded-lg grid grid-cols-2 gap-1">
                 <router-link to="/login"
-                    class="bg-white px-4 py-2 rounded-xl cursor-pointer text-center text-sm font-semibold">Entrar</router-link>
+                    class="bg-white px-4 py-2 rounded-lg cursor-pointer text-center text-sm font-semibold">Entrar</router-link>
                 <router-link to="/register"
-                    class="px-4 py-2 rounded-xl cursor-pointer text-center text-sm text-[#667799] font-semibold">Criar
+                    class="px-4 py-2 rounded-lg cursor-pointer text-center text-sm text-[#667799] font-semibold">Criar
                     conta</router-link>
             </div>
 
             <form @submit.prevent="handleLogin" class="mt-8">
                 <div>
                     <label for="email" class="text-sm font-medium">Email</label>
-                    <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-xl pl-2.5">
+                    <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-lg pl-2.5">
                         <Mail class="w-5 h-5 text-[#667799]" />
                         <input v-model="form.email" type="text" name="email" id="email" required
-                            placeholder="seu@email.com" class="w-full p-2.5 text-sm text-[#1b2232] rounded-xl">
+                            placeholder="seu@email.com" class="w-full p-2.5 text-sm text-[#1b2232] rounded-lg">
                     </div>
                 </div>
                 <div class="mt-4">
                     <label for="password" class="text-sm font-medium">Senha</label>
-                    <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-xl pl-2.5">
+                    <div class="flex items-center gap-2 mt-2 border border-[#E0E5EE] rounded-lg pl-2.5">
                         <Lock class="w-5 h-5 text-[#667799]" />
                         <input v-model="form.password" type="password" name="password" required id="password"
-                            placeholder="••••••••" class="w-full p-2.5 text-sm text-[#1b2232] rounded-xl">
+                            placeholder="••••••••" class="w-full p-2.5 text-sm text-[#1b2232] rounded-lg">
                     </div>
                 </div>
                 <div class="flex justify-end mt-3">
@@ -82,7 +82,7 @@ async function handleLogin() {
                 <FormError :errors="errors" />
                 
                 <button :disabled="loading"
-                    class="mt-6 w-full text-white bg-[#1D56C9] rounded-xl font-bold px-8 py-3 text-sm cursor-pointer hover:bg-[#3367CE] transition-all disabled:opacity-50">
+                    class="mt-6 w-full text-white bg-[#1D56C9] rounded-lg font-bold px-8 py-3 text-sm cursor-pointer hover:bg-[#3367CE] transition-all disabled:opacity-50">
                     {{ loading ? 'Entrando...' : 'Entrar' }}
                 </button>
             </form>

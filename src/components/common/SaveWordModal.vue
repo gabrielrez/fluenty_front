@@ -95,7 +95,7 @@ watch(
         <div v-if="modelValue" class="fixed inset-0 z-50 flex items-center justify-center px-4">
             <div class="absolute inset-0 bg-black/50" @click="close" />
 
-            <div class="relative bg-white rounded-xl shadow-xl w-full max-w-lg p-6 z-10">
+            <div class="relative bg-white rounded-lg shadow-xl w-full max-w-lg p-6 z-10">
                 <header class="flex justify-between items-center">
                     <div class="flex items-center gap-2">
                         <BookmarkPlus class="w-6 h-6 text-[#1D56C9]" />
@@ -113,7 +113,7 @@ watch(
                             Palavra
                         </label>
                         <input type="text" :value="props.word" disabled
-                            class="mt-2.5 block w-full rounded-xl border border-[#E0E5EE] p-2.5 text-sm" />
+                            class="mt-2.5 block w-full rounded-lg border border-[#E0E5EE] p-2.5 text-sm" />
                     </div>
 
                     <div class="mt-6">
@@ -130,17 +130,17 @@ watch(
                             Tradução
                         </label>
                         <input type="text" v-model="translation"
-                            class="mt-2.5 block w-full rounded-xl border border-[#E0E5EE] p-2.5 text-sm" />
+                            class="mt-2.5 block w-full rounded-lg border border-[#E0E5EE] p-2.5 text-sm" />
                     </div>
 
-                    <router-link v-if="isSaved" to="/dictionary" class="flex items-center gap-2 self-end px-4 py-2.5 rounded-xl mt-8 transition-all
+                    <router-link v-if="isSaved" to="/dictionary" class="flex items-center gap-2 self-end px-4 py-2.5 rounded-lg mt-8 transition-all
            bg-[#39AC86] hover:bg-[#2c9975] text-white">
                         <BookmarkCheck class="w-4 h-4" />
                         <span>Ver Dicionário</span>
                     </router-link>
 
                     <button v-else-if="isSaved === false" type="button" @click="saveWord"
-                        :disabled="isSaving || !isTranslated" class="flex items-center gap-2 self-end px-4 py-2.5 rounded-xl mt-8 transition-all cursor-pointer
+                        :disabled="isSaving || !isTranslated" class="flex items-center gap-2 self-end px-4 py-2.5 rounded-lg mt-8 transition-all cursor-pointer
            bg-[#1D56C9] hover:bg-[#2c64d5] text-white
            disabled:opacity-50 disabled:cursor-not-allowed">
                         <BookmarkPlus v-if="!isSaving" class="w-4 h-4" />

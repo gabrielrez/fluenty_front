@@ -73,7 +73,7 @@ async function handleLogout() {
             </SidebarLink>
 
             <button @click="handleLogout"
-                class="flex items-center gap-2 px-4 py-2 rounded-xl transition-colors cursor-pointer text-[#6B778F] hover:bg-[#DD3C3C] hover:text-white">
+                class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors cursor-pointer text-[#6B778F] hover:bg-[#DD3C3C] hover:text-white">
                 <LogOut class="w-4 h-4 text-current" />
                 Sair
             </button>

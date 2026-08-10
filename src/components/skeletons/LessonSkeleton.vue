@@ -14,10 +14,10 @@
         <div class="mt-5 h-10 w-3/4 bg-gray-200 rounded"></div>
 
         <!-- Imagem -->
-        <div class="mt-8 w-full h-40 sm:h-80 bg-gray-200 rounded-xl"></div>
+        <div class="mt-8 w-full h-40 sm:h-80 bg-gray-200 rounded-lg"></div>
 
         <!-- Audio Player -->
-        <div class="mt-6 border border-[#E0E5EE] rounded-xl px-4 py-4 sm:px-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+        <div class="mt-6 border border-[#E0E5EE] rounded-lg px-4 py-4 sm:px-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
             <div class="w-12 h-12 shrink-0 bg-gray-200 rounded-full mx-auto sm:mx-0"></div>
             <div class="flex items-center gap-3 w-full">
                 <div class="h-3 w-10 bg-gray-200 rounded"></div>
@@ -28,8 +28,8 @@
         </div>
 
         <!-- Translation Toolbar -->
-        <div class="mt-6 border border-[#E0E5EE] rounded-xl px-4 sm:px-6 py-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-            <div class="h-10 w-40 bg-gray-200 rounded-xl mx-auto sm:mx-0"></div>
+        <div class="mt-6 border border-[#E0E5EE] rounded-lg px-4 sm:px-6 py-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+            <div class="h-10 w-40 bg-gray-200 rounded-lg mx-auto sm:mx-0"></div>
             <div class="h-4 w-56 bg-gray-200 rounded mx-auto sm:mx-0"></div>
         </div>
 
@@ -43,6 +43,6 @@
         </div>
 
         <!-- Botão -->
-        <div class="mt-12 h-12 w-56 bg-gray-200 rounded-xl mx-auto"></div>
+        <div class="mt-12 h-12 w-56 bg-gray-200 rounded-lg mx-auto"></div>
     </div>
 </template>

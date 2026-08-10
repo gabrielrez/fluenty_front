@@ -106,7 +106,7 @@ watch(
 </script>
 
 <template>
-    <div class="mt-6 border border-[#E0E5EE] rounded-xl shadow-sm
+    <div class="mt-6 border border-[#E0E5EE] rounded-lg shadow-sm
                px-4 py-4 sm:px-6
                flex flex-col sm:flex-row
                sm:items-center gap-3 sm:gap-4">
@@ -144,7 +144,7 @@ watch(
     </div>
     <div @click="downloadAudio" class="mt-6 flex items-center justify-center gap-3
              bg-[#1D56C9] text-white
-             px-4 py-2 rounded-xl
+             px-4 py-2 rounded-lg
              cursor-pointer
              hover:scale-95 transition
              w-full sm:hidden">

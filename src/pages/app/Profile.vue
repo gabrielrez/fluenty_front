@@ -43,7 +43,7 @@ async function manageSubscription() {
             </p>
         </div>
 
-        <div class="block mt-8 p-6 sm:p-8 border border-[#E0E5EE] w-full rounded-xl">
+        <div class="block mt-8 p-6 sm:p-8 border border-[#E0E5EE] w-full rounded-lg">
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-6 sm:gap-0">
                 <div>
                     <h2 class="font-semibold text-2xl break-words">{{ userStore.userName }}</h2>
@@ -60,7 +60,7 @@ async function manageSubscription() {
                 </div>
 
                 <button @click="showEditModal = true"
-                    class="flex items-center justify-center gap-2 px-6 py-2.5 border border-[#E0E5EE] rounded-xl cursor-pointer hover:bg-[#f2f4f7] transition-all w-full sm:w-auto">
+                    class="flex items-center justify-center gap-2 px-6 py-2.5 border border-[#E0E5EE] rounded-lg cursor-pointer hover:bg-[#f2f4f7] transition-all w-full sm:w-auto">
                     <Settings class="w-4 h-4 text-[#6B778F]" />
                     Editar
                 </button>
@@ -69,13 +69,13 @@ async function manageSubscription() {
 
         <div class="grid grid-cols-2 gap-6">
             <button @click="manageSubscription"
-                class="flex justify-center items-center gap-2 mt-6 border border-[#E0E5EE] w-full p-3 rounded-xl cursor-pointer hover:bg-[#f2f4f7] transition-all">
+                class="flex justify-center items-center gap-2 mt-6 border border-[#E0E5EE] w-full p-3 rounded-lg cursor-pointer hover:bg-[#f2f4f7] transition-all">
                 <CreditCard class="w-4 h-4 mt-0.5 text-[#243B6B]" />
                 <span class="text-[#243B6B] text-sm font-semibold">Gerenciar assinatura</span>
             </button>
 
             <button @click="handleLogout"
-                class="flex justify-center items-center gap-2 mt-6 border border-[#E0E5EE] w-full p-3 rounded-xl cursor-pointer hover:bg-[#f2f4f7] transition-all">
+                class="flex justify-center items-center gap-2 mt-6 border border-[#E0E5EE] w-full p-3 rounded-lg cursor-pointer hover:bg-[#f2f4f7] transition-all">
                 <LogOut class="w-4 h-4 mt-0.5 text-[#DD3C3C]" />
                 <span class="text-[#DD3C3C] text-sm font-semibold">Sair da Conta</span>
             </button>

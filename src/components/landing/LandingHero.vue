@@ -30,16 +30,16 @@
                 </p>
             </div>
             <router-link to="/dashboard"
-                class="mx-auto lg:mx-0 mt-6 w-max flex items-center gap-2 bg-[#1D56C9] px-8 py-3 rounded-xl text-white font-medium hover:bg-[#3367CE] hover:scale-[98%] transition-all">Começar
+                class="mx-auto lg:mx-0 mt-6 w-max flex items-center gap-2 bg-[#1D56C9] px-8 py-3 rounded-lg text-white font-medium hover:bg-[#3367CE] hover:scale-[98%] transition-all">Começar
                 a Aprender
                 <ArrowRightIcon class="w-4 h-4" />
             </router-link>
         </div>
-        <div class="border border-[#E0E5EE] rounded-xl lg:mt-0 mt-12 shadow-sm bg-white">
+        <div class="border border-[#E0E5EE] rounded-lg lg:mt-0 mt-12 shadow-sm bg-white">
             <div
                 class="bg-[#F3F6FC] px-4 py-5 flex justify-between items-center border-b border-[#E0E5EE] rounded-t-xl">
                 <div class="flex items-center gap-3">
-                    <div class="bg-[#DDE6F6] p-2 rounded-xl">
+                    <div class="bg-[#DDE6F6] p-2 rounded-lg">
                         <BookOpen class="w-5 h-5 text-[#1D56C9]" />
                     </div>
                     <div>

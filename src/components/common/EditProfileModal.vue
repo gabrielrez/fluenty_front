@@ -82,7 +82,7 @@ watch(
         <div v-if="modelValue" class="fixed inset-0 z-50 flex items-center justify-center px-4">
             <div class="absolute inset-0 bg-black/50" @click="close" />
 
-            <div class="relative bg-white rounded-xl shadow-xl w-full max-w-lg p-6 z-10">
+            <div class="relative bg-white rounded-lg shadow-xl w-full max-w-lg p-6 z-10">
                 <header class="flex justify-between items-center">
                     <div class="flex items-center gap-2">
                         <Settings class="w-6 h-6 text-[#1D56C9]" />
@@ -107,7 +107,7 @@ watch(
                             Nome
                         </label>
                         <input id="edit-name" type="text" v-model="name"
-                            class="mt-2.5 block w-full rounded-xl border border-[#E0E5EE] p-2.5 text-sm focus:outline-none focus:border-[#1D56C9]" />
+                            class="mt-2.5 block w-full rounded-lg border border-[#E0E5EE] p-2.5 text-sm focus:outline-none focus:border-[#1D56C9]" />
                     </div>
 
                     <hr class="my-6 border-[#E0E5EE]" />
@@ -121,7 +121,7 @@ watch(
                             Senha Atual
                         </label>
                         <input id="edit-current-password" type="password" v-model="currentPassword"
-                            class="mt-2.5 block w-full rounded-xl border border-[#E0E5EE] p-2.5 text-sm focus:outline-none focus:border-[#1D56C9]" />
+                            class="mt-2.5 block w-full rounded-lg border border-[#E0E5EE] p-2.5 text-sm focus:outline-none focus:border-[#1D56C9]" />
                     </div>
 
                     <div class="mt-4">
@@ -129,7 +129,7 @@ watch(
                             Nova Senha
                         </label>
                         <input id="edit-password" type="password" v-model="password"
-                            class="mt-2.5 block w-full rounded-xl border border-[#E0E5EE] p-2.5 text-sm focus:outline-none focus:border-[#1D56C9]" />
+                            class="mt-2.5 block w-full rounded-lg border border-[#E0E5EE] p-2.5 text-sm focus:outline-none focus:border-[#1D56C9]" />
                     </div>
 
                     <div class="mt-4">
@@ -137,11 +137,11 @@ watch(
                             Confirmar Nova Senha
                         </label>
                         <input id="edit-password-confirmation" type="password" v-model="passwordConfirmation"
-                            class="mt-2.5 block w-full rounded-xl border border-[#E0E5EE] p-2.5 text-sm focus:outline-none focus:border-[#1D56C9]" />
+                            class="mt-2.5 block w-full rounded-lg border border-[#E0E5EE] p-2.5 text-sm focus:outline-none focus:border-[#1D56C9]" />
                     </div>
 
                     <button type="submit" :disabled="isSaving"
-                        class="flex items-center justify-center gap-2 self-end px-6 py-2.5 rounded-xl mt-8 transition-all cursor-pointer bg-[#1D56C9] hover:bg-[#2c64d5] text-white disabled:opacity-50 disabled:cursor-not-allowed">
+                        class="flex items-center justify-center gap-2 self-end px-6 py-2.5 rounded-lg mt-8 transition-all cursor-pointer bg-[#1D56C9] hover:bg-[#2c64d5] text-white disabled:opacity-50 disabled:cursor-not-allowed">
                         <span v-if="isSaving">Salvando...</span>
                         <span v-else>Salvar</span>
                     </button>

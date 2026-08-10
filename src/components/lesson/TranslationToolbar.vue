@@ -17,13 +17,13 @@ const emit = defineEmits(['toggle'])
            sm:justify-between sm:items-center
            gap-4
            border border-[#E0E5EE]
-           rounded-xl px-4 sm:px-6 py-4"
+           rounded-lg px-4 sm:px-6 py-4"
   >
     <button
       @click="emit('toggle')"
       class="flex items-center justify-center gap-3
              border border-[#E0E5EE]
-             px-4 py-2 rounded-xl
+             px-4 py-2 rounded-lg
              cursor-pointer
              hover:scale-95 transition
              w-full sm:w-auto"

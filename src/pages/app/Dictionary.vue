@@ -85,8 +85,8 @@ onMounted(fetchWords)
         </div>
 
         <div
-            class="flex items-center gap-3 sm:gap-4 mt-8 border border-[#E0E5EE] w-full px-4 py-6 rounded-xl sm:justify-start justify-center">
-            <div class="flex justify-center items-center w-max bg-[#E8EEF9] p-2.5 rounded-xl">
+            class="flex items-center gap-3 sm:gap-4 mt-8 border border-[#E0E5EE] w-full px-4 py-6 rounded-lg sm:justify-start justify-center">
+            <div class="flex justify-center items-center w-max bg-[#E8EEF9] p-2.5 rounded-lg">
                 <BookOpenCheckIcon class="w-7 h-7 text-[#1D56C9]" />
             </div>
             <div>
@@ -103,19 +103,19 @@ onMounted(fetchWords)
             v-model="search"
             type="text"
             placeholder="Pesquisar..."
-            class="mt-6 pl-4 text-sm border border-[#E0E5EE] h-10 rounded-xl w-full"
+            class="mt-6 pl-4 text-sm border border-[#E0E5EE] h-10 rounded-lg w-full"
         />
 
         <div v-if="isLoading" class="mt-5 space-y-4">
-            <div class="bg-gray-200 h-24 rounded-xl animate-pulse" />
-            <div class="bg-gray-200 h-24 rounded-xl animate-pulse" />
+            <div class="bg-gray-200 h-24 rounded-lg animate-pulse" />
+            <div class="bg-gray-200 h-24 rounded-lg animate-pulse" />
         </div>
 
         <div v-else class="mt-5 space-y-4">
             <div
                 v-for="item in words"
                 :key="item.id"
-                class="border border-[#E0E5EE] w-full px-4 py-6 sm:px-5 sm:py-6 rounded-xl"
+                class="border border-[#E0E5EE] w-full px-4 py-6 sm:px-5 sm:py-6 rounded-lg"
             >
                 <div class="flex justify-between items-start sm:items-center gap-2">
                     <h3 class="font-medium text-lg break-words">

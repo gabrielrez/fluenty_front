@@ -165,10 +165,10 @@ watch(
 
     <div class="flex flex-col sm:flex-row sm:items-center gap-3 my-8">
         <input v-model="filters.search" type="text" placeholder="Pesquisar..."
-            class="pl-4 text-sm border border-[#E0E5EE] h-10 rounded-xl w-full" />
+            class="pl-4 text-sm border border-[#E0E5EE] h-10 rounded-lg w-full" />
 
         <button @click="showFilters = !showFilters"
-            class="h-10 px-4 rounded-xl text-sm font-medium flex items-center justify-center gap-2 border cursor-pointer transition-all whitespace-nowrap w-full sm:w-auto shrink-0"
+            class="h-10 px-4 rounded-lg text-sm font-medium flex items-center justify-center gap-2 border cursor-pointer transition-all whitespace-nowrap w-full sm:w-auto shrink-0"
             :class="showFilters || hasActiveFilters
                 ? 'bg-blue-50 text-blue-700 border-blue-600'
                 : 'border-[#E0E5EE] text-[#334155] hover:bg-[#F5F7FA]'">
@@ -181,7 +181,7 @@ watch(
         </button>
 
         <button v-if="hasActiveFilters" @click="clearFilters"
-            class="h-10 px-3 border rounded-xl flex items-center justify-center gap-2 text-sm bg-[#DD3C3C] text-white cursor-pointer transition-all w-full sm:w-auto">
+            class="h-10 px-3 border rounded-lg flex items-center justify-center gap-2 text-sm bg-[#DD3C3C] text-white cursor-pointer transition-all w-full sm:w-auto">
             <X class="w-4 h-4" />
             Clear
         </button>

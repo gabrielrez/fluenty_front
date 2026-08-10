@@ -37,7 +37,7 @@ const wordClick = (word, pIndex, wIndex) => {
 </script>
 
 <template>
-    <div class="mt-6 p-8 bg-[#F6F7F8] border border-[#E0E5EE] rounded-xl font-[Libre_Baskerville]">
+    <div class="mt-6 p-8 bg-[#F6F7F8] border border-[#E0E5EE] rounded-lg font-[Libre_Baskerville]">
         <div v-for="(pair, pIndex) in paragraphPairs" :key="pIndex" class="mb-10 last:mb-0">
             <p class="text-lg leading-relaxed mb-2">
                 <span v-for="(word, wIndex) in pair.original.split(/(\s+)/)" :key="`${pIndex}-${wIndex}`"
